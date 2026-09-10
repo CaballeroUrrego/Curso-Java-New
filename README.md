@@ -1,18 +1,42 @@
-## Getting Started
+# Manipulación de Cadenas de Texto (`String`) en Java
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este proyecto contiene un ejemplo práctico sobre el uso de la clase `String` en Java y los métodos esenciales para inspeccionar, transformar y manipular cadenas de texto.
 
-## Folder Structure
+---
 
-The workspace contains two folders by default, where:
+## 👨‍💻 Autor y Créditos
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+* **Desarrollador:** Caballero Urrego Dev
+* **Fecha:** 07/09/2026
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+---
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## 📌 Descripción del Proyecto
 
-## Dependency Management
+El archivo `App.java` demuestra cómo trabajar con cadenas de texto utilizando una variable de prueba con espacios de relleno al inicio y al final:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### 📌 Cadena de Ejemplo
+
+El programa utiliza la siguiente variable de prueba con espacios en blanco de relleno para evaluar el comportamiento de cada método:
+
+### 📌 Cadena de Ejemplo
+
+El programa utiliza la siguiente variable de prueba con espacios en blanco de relleno para evaluar el comportamiento de cada método:
+
+
+
+### 🛠️ Métodos Explicados en el Código
+
+| Método | Descripción | Ejemplo en Código |
+| :--- | :--- | :--- |
+| `length()` | Cuenta el número total de caracteres (incluye espacios). | Mide la longitud de `texto`. |
+| `charAt(index)` | Devuelve el carácter en la posición indicada (desde `0`). | Obtiene el primer carácter. |
+| `substring(start, end)` | Extrae un texto desde `start` hasta `end - 1`. | Corta desde la posición 5 a la 15. |
+| `toLowerCase()` | Convierte todo el texto a minúsculas. | Pasa la cadena a minúsculas. |
+| `toUpperCase()` | Convierte todo el texto a MAYÚSCULAS. | Pasa la cadena a mayúsculas. |
+| `indexOf(target)` | Busca la posición donde inicia una palabra/carácter. | Busca la palabra `"variable"`. |
+| `replace(old, new)` | Reemplaza un texto por otro nuevo. | Cambia `"texto"` por `"parrafo"`. |
+| `contains(target)` | Verifica si contiene un texto (`true`/`false`). | Busca si contiene `"asignado"`. |
+| `trim()` | Elimina espacios sobrantes al inicio y al final. | Quita espacios en los bordes. |
+
+
