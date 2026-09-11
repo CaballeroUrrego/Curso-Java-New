@@ -14,7 +14,6 @@ public class App {
 
                 int opcion = scanner.nextInt();
 
-               
                 switch (opcion) {
                         case 1:
                                 System.out.println("Me gusta el café");
@@ -32,30 +31,33 @@ public class App {
                                 System.out.println("Opcion no valida Fin del programa ");
                                 break;
                 }
-System.out.println("Disfrute de su bebida");
-scanner.close();
+                if (opcion <= 4) {
+                        System.out.println("Disfrute de su bebida");
+                }
 
+                scanner.close();
 
                 // Que tipo de bebida te gusta :Switch
-               /*  String bebida = "café";
-                switch (bebida) {
-                        case "café":
-                                System.out.println("Me gusta el café");
-                                break;
-                        case "Mate":
-                                System.out.println("Debes ser Argentino,uruguayo o paraguayo");
-                                break;
-                        case "Gaseosa":
-                                System.out.println("Me gusta la gaseosa");
-                                break;
-                        case "vino":
-                                System.out.println("Si tomaste vino no manejes porfavor");
-                                break;
-                        default:
-                                System.out.println("Disfruta de tu bebida");
-                                break;
-                }*/
-
+                /*
+                 * String bebida = "café";
+                 * switch (bebida) {
+                 * case "café":
+                 * System.out.println("Me gusta el café");
+                 * break;
+                 * case "Mate":
+                 * System.out.println("Debes ser Argentino,uruguayo o paraguayo");
+                 * break;
+                 * case "Gaseosa":
+                 * System.out.println("Me gusta la gaseosa");
+                 * break;
+                 * case "vino":
+                 * System.out.println("Si tomaste vino no manejes porfavor");
+                 * break;
+                 * default:
+                 * System.out.println("Disfruta de tu bebida");
+                 * break;
+                 * }
+                 */
 
                 /*
                  * if (bebida == "café") {
