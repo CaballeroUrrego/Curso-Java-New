@@ -65,3 +65,18 @@ Este proyecto reúne ejercicios prácticos y explicaciones conceptuales para com
 | **AND** (Y) | `&&` | Ambos operandos deben ser `true` | `true && true`<br>`true && false` | **`true`**<br>**`false`** |
 | **OR** (Ó) | `\|\|` | Al menos uno de los operandos debe ser `true` | `true \|\| false`<br>`false \|\| false` | **`true`**<br>**`false`** |
 | **NOT** (NO) | `!` | Invierte el valor actual (de `true` a `false` y viceversa) | `!true`<br>`!false` | **`false`**<br>**`true`** |
+
+
+
+## 10/09/2026
+## Estructuras de control :
+## Explicación del Código: Estructuras de Control en Java
+
+Este programa demuestra el uso de **estructuras condicionales relacionales y lógicas** (`if`, `else if`, `else`) para evaluar el acceso de un usuario a un establecimiento según su edad.
+
+### Flujo de Lógica:
+* **`edad > 18 && edad <= 60`**: Permite el ingreso regular para personas en el rango de 19 a 60 años.
+* **`edad > 60`**: Restringe el acceso a personas mayores de 60 años.
+* **`edad == 18`**: Permite el acceso exacto a los 18 años con recordatorio de identificación.
+* **`else`**: Deniega el acceso a menores de 18 años.
+
