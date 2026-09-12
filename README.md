@@ -6,8 +6,8 @@ Este proyecto contiene un ejemplo práctico sobre el uso de la clase `String` en
 
 ## 👨‍💻 Autor y Créditos
 
-* **Desarrollador:** Caballero Urrego Dev
-* **Fecha:** 07/09/2026
+- **Desarrollador:** Caballero Urrego Dev
+- **Fecha:** 07/09/2026
 
 ---
 
@@ -23,22 +23,19 @@ El programa utiliza la siguiente variable de prueba con espacios en blanco de re
 
 El programa utiliza la siguiente variable de prueba con espacios en blanco de relleno para evaluar el comportamiento de cada método:
 
-
-
 ### 🛠️ Métodos Explicados en el Código
 
-| Método | Descripción | Ejemplo en Código |
-| :--- | :--- | :--- |
-| `length()` | Cuenta el número total de caracteres (incluye espacios). | Mide la longitud de `texto`. |
-| `charAt(index)` | Devuelve el carácter en la posición indicada (desde `0`). | Obtiene el primer carácter. |
-| `substring(start, end)` | Extrae un texto desde `start` hasta `end - 1`. | Corta desde la posición 5 a la 15. |
-| `toLowerCase()` | Convierte todo el texto a minúsculas. | Pasa la cadena a minúsculas. |
-| `toUpperCase()` | Convierte todo el texto a MAYÚSCULAS. | Pasa la cadena a mayúsculas. |
-| `indexOf(target)` | Busca la posición donde inicia una palabra/carácter. | Busca la palabra `"variable"`. |
-| `replace(old, new)` | Reemplaza un texto por otro nuevo. | Cambia `"texto"` por `"parrafo"`. |
-| `contains(target)` | Verifica si contiene un texto (`true`/`false`). | Busca si contiene `"asignado"`. |
-| `trim()` | Elimina espacios sobrantes al inicio y al final. | Quita espacios en los bordes. |
-
+| Método                  | Descripción                                               | Ejemplo en Código                  |
+| :---------------------- | :-------------------------------------------------------- | :--------------------------------- |
+| `length()`              | Cuenta el número total de caracteres (incluye espacios).  | Mide la longitud de `texto`.       |
+| `charAt(index)`         | Devuelve el carácter en la posición indicada (desde `0`). | Obtiene el primer carácter.        |
+| `substring(start, end)` | Extrae un texto desde `start` hasta `end - 1`.            | Corta desde la posición 5 a la 15. |
+| `toLowerCase()`         | Convierte todo el texto a minúsculas.                     | Pasa la cadena a minúsculas.       |
+| `toUpperCase()`         | Convierte todo el texto a MAYÚSCULAS.                     | Pasa la cadena a mayúsculas.       |
+| `indexOf(target)`       | Busca la posición donde inicia una palabra/carácter.      | Busca la palabra `"variable"`.     |
+| `replace(old, new)`     | Reemplaza un texto por otro nuevo.                        | Cambia `"texto"` por `"parrafo"`.  |
+| `contains(target)`      | Verifica si contiene un texto (`true`/`false`).           | Busca si contiene `"asignado"`.    |
+| `trim()`                | Elimina espacios sobrantes al inicio y al final.          | Quita espacios en los bordes.      |
 
 # ☕ Fundamentos de Java & Operadores
 
@@ -50,33 +47,75 @@ Bienvenido a la bitácora de aprendizaje y código del curso **Java desde Cero**
 
 Este proyecto reúne ejercicios prácticos y explicaciones conceptuales para comprender el funcionamiento interno de Java. Se abarcan temas esenciales como:
 
-* **Sintaxis y Estructura:** Uso de métodos principales (`main`) y manejo de archivos `.java`.
-* **Operadores Aritméticos:** Operaciones elementales (`+`, `-`, `*`, `/`) y cálculo de residuo o paridad mediante el operador módulo (`%`).
-* **Tipos de Datos:** Manejo de enteros (`int`), decimales (`double`) y tipos booleanos (`boolean`)[cite: 1].
-* **Operadores de Asignación:** Modificación rápida de variables (`+=`, `-=`, `*=`, `/=`, `++`, `--`)[cite: 1].
-* **Operadores de Comparación:** Evaluación relacional (`>`, `<`, `==`) que retornan valores booleanos[cite: 1].
-* **Lógica Booleana:** Compuertas y lógica mediante los operadores `&&`, `||` y `!`[cite: 1].
+- **Sintaxis y Estructura:** Uso de métodos principales (`main`) y manejo de archivos `.java`.
+- **Operadores Aritméticos:** Operaciones elementales (`+`, `-`, `*`, `/`) y cálculo de residuo o paridad mediante el operador módulo (`%`).
+- **Tipos de Datos:** Manejo de enteros (`int`), decimales (`double`) y tipos booleanos (`boolean`)[cite: 1].
+- **Operadores de Asignación:** Modificación rápida de variables (`+=`, `-=`, `*=`, `/=`, `++`, `--`)[cite: 1].
+- **Operadores de Comparación:** Evaluación relacional (`>`, `<`, `==`) que retornan valores booleanos[cite: 1].
+- **Lógica Booleana:** Compuertas y lógica mediante los operadores `&&`, `||` y `!`[cite: 1].
 
 ---
+
 ## 📊 Tabla de la Verdad (Guía de Referencia)
 
-| Operación | Operador en Java | Condición para ser Verdadero (`true`) | Ejemplo | Resultado |
-| :--- | :---: | :--- | :--- | :---: |
-| **AND** (Y) | `&&` | Ambos operandos deben ser `true` | `true && true`<br>`true && false` | **`true`**<br>**`false`** |
-| **OR** (Ó) | `\|\|` | Al menos uno de los operandos debe ser `true` | `true \|\| false`<br>`false \|\| false` | **`true`**<br>**`false`** |
-| **NOT** (NO) | `!` | Invierte el valor actual (de `true` a `false` y viceversa) | `!true`<br>`!false` | **`false`**<br>**`true`** |
-
-
+| Operación    | Operador en Java | Condición para ser Verdadero (`true`)                      | Ejemplo                                 |         Resultado         |
+| :----------- | :--------------: | :--------------------------------------------------------- | :-------------------------------------- | :-----------------------: |
+| **AND** (Y)  |       `&&`       | Ambos operandos deben ser `true`                           | `true && true`<br>`true && false`       | **`true`**<br>**`false`** |
+| **OR** (Ó)   |      `\|\|`      | Al menos uno de los operandos debe ser `true`              | `true \|\| false`<br>`false \|\| false` | **`true`**<br>**`false`** |
+| **NOT** (NO) |       `!`        | Invierte el valor actual (de `true` a `false` y viceversa) | `!true`<br>`!false`                     | **`false`**<br>**`true`** |
 
 ## 10/09/2026
+
 ## Estructuras de control :
+
 ## Explicación del Código: Estructuras de Control en Java
 
 Este programa demuestra el uso de **estructuras condicionales relacionales y lógicas** (`if`, `else if`, `else`) para evaluar el acceso de un usuario a un establecimiento según su edad.
 
 ### Flujo de Lógica:
-* **`edad > 18 && edad <= 60`**: Permite el ingreso regular para personas en el rango de 19 a 60 años.
-* **`edad > 60`**: Restringe el acceso a personas mayores de 60 años.
-* **`edad == 18`**: Permite el acceso exacto a los 18 años con recordatorio de identificación.
-* **`else`**: Deniega el acceso a menores de 18 años.
 
+- **`edad > 18 && edad <= 60`**: Permite el ingreso regular para personas en el rango de 19 a 60 años.
+- **`edad > 60`**: Restringe el acceso a personas mayores de 60 años.
+- **`edad == 18`**: Permite el acceso exacto a los 18 años con recordatorio de identificación.
+- **`else`**: Deniega el acceso a menores de 18 años.
+
+## 12/09/2026
+
+## Estructuras de Control Iterativas: Bucle For y Bucles Anidados
+
+El bucle `for` permite repetir un bloque de código un número determinado de veces. Su sintaxis básica es:
+
+```java
+for (inicialización; condición; actualización) {
+    // Código a ejecutar
+}
+```
+
+### Bucles Anidados (Triple Nivel)
+
+En este ejercicio se implementaron tres bucles `for` anidados (variables `i`, `j` y `k`), donde cada variable itera del 1 al 3:
+
+```java
+for (i = 1; i <= 3; i++) {           // Nivel exterior (i)
+    for (j = 1; j <= 3; j++) {       // Nivel intermedio (j)
+        for (k = 1; k <= 3; k++) {   // Nivel interior (k)
+            System.out.print("i:");
+            System.out.print(i);
+            System.out.print(" j:");
+            System.out.print(j);
+            System.out.print(" k:");
+            System.out.println(k);
+        }
+    }
+}
+```
+
+### Flujo de Ejecución:
+
+- **De adentro hacia afuera:** Por cada incremento del bucle exterior (`i`), el bucle intermedio (`j`) avanza un paso, y el interior (`k`) se ejecuta por completo de 1 a 3.
+- **Total de iteraciones:** Al tener 3 niveles de 3 repeticiones cada uno, se generan $3 \times 3 \times 3 = \mathbf{27}$ combinaciones en total (desde `i:1 j:1 k:1` hasta `i:3 j:3 k:3`).
+
+### Manejo de Salida en Consola:
+
+- **`System.out.print()`:** Imprime texto o variables sin salto de línea, permitiendo armar los datos de `i`, `j` y `k` en la misma fila.
+- **`System.out.println()`:** Imprime el valor final de `k` e introduce un salto de línea, preparando la consola para la siguiente iteración.
