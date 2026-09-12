@@ -119,3 +119,55 @@ for (i = 1; i <= 3; i++) {           // Nivel exterior (i)
 
 - **`System.out.print()`:** Imprime texto o variables sin salto de línea, permitiendo armar los datos de `i`, `j` y `k` en la misma fila.
 - **`System.out.println()`:** Imprime el valor final de `k` e introduce un salto de línea, preparando la consola para la siguiente iteración.
+
+---
+
+## Estructuras de Control Iterativas: Bucle While
+
+El bucle `while` ejecuta un bloque de instrucciones de manera repetitiva **mientras una condición booleana sea verdadera (`true`)**. La condición se evalúa antes de cada iteración.
+
+### Sintaxis Básica
+
+```java
+while (condición) {
+    // Código a ejecutar mientras la condición sea verdadera
+    // Actualización de la variable de control
+}
+```
+
+### Código Implementado
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+        // Estructuras de control iterativas: while
+        int contador = 1;
+
+        while (contador <= 5) {
+            System.out.println(contador);
+            // Actualización de la variable para evitar un bucle infinito
+            contador++;
+        }
+        System.err.println(contador);
+    }
+}
+```
+
+### 🧠 Flujo de Ejecución:
+
+1. **Inicialización (`int contador = 1;`):** Se define la variable de control antes de entrar al bucle.
+2. **Evaluación de la condición (`contador <= 5`):**
+   - **Vuelta 1:** `contador = 1` $\rightarrow$ Imprime `1`, incrementa a `2`.
+   - **Vuelta 2:** `contador = 2` $\rightarrow$ Imprime `2`, incrementa a `3`.
+   - **Vuelta 3:** `contador = 3` $\rightarrow$ Imprime `3`, incrementa a `4`.
+   - **Vuelta 4:** `contador = 4` $\rightarrow$ Imprime `4`, incrementa a `5`.
+   - **Vuelta 5:** `contador = 5` $\rightarrow$ Imprime `5`, incrementa a `6`.
+3. **Condición de Parada:** Al volver a evaluar, `6 <= 5` es `false`, por lo que el ciclo termina.
+4. **Valor Final Fuera del Bucle:** Al salir del `while`, la variable `contador` conserva el valor `6`.
+
+### 📌 Puntos Clave:
+
+- **Prevención de Bucle Infinito:** Es fundamental la actualización `contador++`. Si se omite, la condición siempre evaluará a `true` y el programa nunca terminará.
+- **Diferencia entre `System.out` y `System.err`:**
+  - **`System.out.println()`**: Envía datos al canal de salida estándar (texto normal).
+  - **`System.err.println()`**: Envía datos al canal de salida de error estándar (usualmente resaltado en color rojo en terminales/IDEs o usado para depuración y avisos).
