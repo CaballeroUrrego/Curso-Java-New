@@ -1,77 +1,35 @@
-import java.util.Scanner;
-
 public class App {
         public static void main(String[] args) throws Exception {
-                // Juego de consola:nos permitira escribir y en base se tomara cierta decision
-                Scanner scanner = new Scanner(System.in);
+                //12/09/2026
+                // Estructuras de control interativas :Bucle For
+                // for (inizializacion de una variable,condicion,actualizacion)
+                int i;
+                int j;
+                int k;
+                for (i = 1; i <= 3; i++) {
 
-                System.out.println("Bienvenido a la maquina expendedora de bebidas");
-                System.out.println("Elegir una opcion de las Siguientes:");
-                System.out.println("1 - cafe");
-                System.out.println("2 - Mate");
-                System.out.println("3 - Gaseosa");
-                System.out.println("4 - vino");
+                        for (j = 1; j <= 3; j++) {
+                                for (k = 1; k <= 3; k++) {
+                                        System.out.print("i:");
+                                        System.out.print(i);
+                                        System.out.print(" j:");
+                                        System.out.print(j);
+                                        System.out.print(" k:");
+                                        System.out.println(k);
+                                }
 
-                int opcion = scanner.nextInt();
+                                // System.out.print("i:");
+                                // System.out.print(i);
+                                // System.out.print(" j:");
+                                // System.out.println(j);
+                        }
 
-                switch (opcion) {
-                        case 1:
-                                System.out.println("Me gusta el café");
-                                break;
-                        case 2:
-                                System.out.println("Debes ser Argentino,uruguayo o paraguayo");
-                                break;
-                        case 3:
-                                System.out.println("Me gusta la gaseosa");
-                                break;
-                        case 4:
-                                System.out.println("Si tomaste vino no manejes porfavor");
-                                break;
-                        default:
-                                System.out.println("Opcion no valida Fin del programa ");
-                                break;
+                        // for(int i = 1; i <=10;i++){
+
+                        // System.out.print(i); //Muestra de corrido
+                        // System.out.println(i); // Muestra en listas
                 }
-                if (opcion <= 4) {
-                        System.out.println("Disfrute de su bebida");
-                }
-
-                scanner.close();
-
-                // Que tipo de bebida te gusta :Switch
-                /*
-                 * String bebida = "café";
-                 * switch (bebida) {
-                 * case "café":
-                 * System.out.println("Me gusta el café");
-                 * break;
-                 * case "Mate":
-                 * System.out.println("Debes ser Argentino,uruguayo o paraguayo");
-                 * break;
-                 * case "Gaseosa":
-                 * System.out.println("Me gusta la gaseosa");
-                 * break;
-                 * case "vino":
-                 * System.out.println("Si tomaste vino no manejes porfavor");
-                 * break;
-                 * default:
-                 * System.out.println("Disfruta de tu bebida");
-                 * break;
-                 * }
-                 */
-
-                /*
-                 * if (bebida == "café") {
-                 * System.out.println("Me gusta el café");
-                 * } else if (bebida == "Mate") {
-                 * System.out.println("Debes ser Argentino,uruguayo o paraguayo");
-                 * } else if (bebida == "Gaseosa") {
-                 * System.out.println("Me gusta la gaseosa");
-                 * } else if (bebida == "vino") {
-                 * System.out.println("Si tomaste vino no manejes porfavor");
-                 * } else {
-                 * System.out.println("Disfruta de tu bebida");
-                 * }
-                 */
-
+                // System.out.print("el valor que termino i es: ");
+                // System.out.print(i);
         }
 }
