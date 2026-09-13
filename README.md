@@ -171,3 +171,175 @@ public class App {
 - **Diferencia entre `System.out` y `System.err`:**
   - **`System.out.println()`**: Envía datos al canal de salida estándar (texto normal).
   - **`System.err.println()`**: Envía datos al canal de salida de error estándar (usualmente resaltado en color rojo en terminales/IDEs o usado para depuración y avisos).
+
+---
+
+## Arreglos (Arrays / Vectores)
+
+Los **arreglos** son estructuras de datos que almacenan un conjunto de valores del mismo tipo de forma secuencial. Cada elemento dentro del arreglo es accesible mediante una posición numérica denominada **índice**.
+
+### 📌 Características Principales:
+
+- **Índice base cero (`0`):** El primer elemento se posiciona en el índice `0` y el último en `longitud - 1`.
+- **Tipo de dato homogéneo:** Todos los elementos deben pertenecer al mismo tipo (`int[]`, `char[]`, `String[]`, etc.).
+- **Acceso y modificación directa:** Se accede o reasigna un valor usando la sintaxis `arreglo[indice]`.
+- **Propiedad `.length`:** Atributo que devuelve el tamaño total de elementos del arreglo.
+
+---
+
+### 💻 Declaración, Inicialización y Modificación
+
+```java
+// 1. Declaración asignando tamaño en memoria:
+int[] numeros = new int[5];
+
+// 2. Inicialización directa con valores:
+int[] numeros = { 10, 20, 30, 40, 50 };
+
+// Modificación de un elemento por su índice:
+numeros[2] = 70; // El elemento en el índice 2 pasa de 30 a 70
+```
+
+---
+
+### 🔄 Formas de Recorrer un Arreglo
+
+#### 1. Bucle `for-each` (Bucle Mejorado)
+Recorre cada elemento secuencialmente sin necesidad de gestionar manualmente la condición de parada o el índice:
+
+```java
+int indice = 0;
+for (int numero : numeros) {
+    System.out.println(numero); // Imprime el valor
+    System.out.println(indice); // Imprime el índice de referencia
+    indice++;
+}
+```
+
+#### 2. Bucle `for` Clásico usando `.length`
+Permite tener control total sobre el índice durante la iteración:
+
+```java
+for (int index = 0; index < numeros.length; index++) {
+    System.out.println(numeros[index]); // Acceso al valor en el índice actual
+    System.out.println(index);          // Índice actual (0 a 4)
+}
+```
+
+---
+
+### 💡 Nota: `.length` (Arreglos) vs `.length()` (Strings)
+
+- **`arreglo.length`**: Es un **atributo/propiedad** de los arreglos (sin paréntesis) que contiene el tamaño del array.
+- **`string.length()`**: Es un **método** de la clase `String` (con paréntesis) que calcula el conteo de caracteres (ej. `"Abecedario".length()` retorna `10`).
+
+---
+
+## 13/09/2026
+
+## 🎮 Proyecto Práctico: Juego del Ahorcado (Hangman Game)
+
+En este ejercicio práctico se integran los conceptos fundamentales aprendidos hasta el momento: **Manejo de Cadenas (`String`)**, **Arreglos (`char[]`)**, **Estructuras de Control Condicionales (`if/else`)** e **Iterativas (`while`, `for`)**, y **Entrada de Datos por Consola (`Scanner`)**.
+
+### 🎯 Objetivo del Juego
+Adivinar una palabra secreta carácter por carácter antes de que se agoten los intentos permitidos (en este caso, 10 intentos).
+
+---
+
+### 💻 Código Implementado (`Ahorcado.java`)
+
+```java
+import java.util.Scanner;
+
+public class Ahorcado {
+
+  public static void main(String[] args) throws Exception {
+    // Clase Scanner que nos permite que el usuario escriba
+    Scanner scanner = new Scanner(System.in);
+
+    // Declaraciones y asignaciones de variables
+    String PalabraSecreta = "inteligencia";
+    int IntentosMaximos = 10;
+    int Intentos = 0;
+    boolean PalabraAdivinada = false;
+
+    // Arreglos: progreso de las letras adivinadas
+    char[] LetrasAdivinadas = new char[PalabraSecreta.length()];
+
+    // Estructura de control: Iterativa (Bucle for) para inicializar con guiones '_'
+    for (int i = 0; i < LetrasAdivinadas.length; i++) {
+      LetrasAdivinadas[i] = '_';
+    }
+
+    // Estructura de control: Iterativa (While)
+    // Se ejecuta mientras la palabra no haya sido adivinada y queden intentos disponibles
+    while (!PalabraAdivinada && Intentos < IntentosMaximos) {
+      System.out.println(
+          "Palabra a adivinar : " + String.valueOf(LetrasAdivinadas) + " (" + PalabraSecreta.length() + " letras)");
+      System.out.println("Introduce una letra, por favor");
+      
+      // Capturamos el primer carácter introducido y lo convertimos a minúscula
+      char letra = Character.toLowerCase(scanner.next().charAt(0));
+
+      boolean LetraCorrecta = false;
+
+      // Estructura de control: Iterativa (Bucle for) para buscar coincidencias
+      for (int i = 0; i < PalabraSecreta.length(); i++) {
+        // Estructura de control Condicional: si la letra coincide, actualizamos el arreglo
+        if (PalabraSecreta.charAt(i) == letra) {
+          LetrasAdivinadas[i] = letra;
+          LetraCorrecta = true;
+        }
+      }
+
+      // Si la letra no fue acertada, se penaliza sumando un intento
+      if (!LetraCorrecta) {
+        Intentos++;
+        System.out.println("¡Incorrecto!  Te quedan " + (IntentosMaximos - Intentos) + " Intentos");
+      }
+
+      // Comprobamos si el arreglo actual coincide completamente con la palabra secreta
+      if (String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)) {
+        PalabraAdivinada = true;
+        System.out.println("¡Felicidades! Has adivinado la palabra: " + PalabraSecreta);
+      }
+    }
+
+    // Mensaje de fin de juego si agotó los intentos sin adivinar
+    if (!PalabraAdivinada) {
+      System.out.println("¡Has perdido! Te quedaste sin intentos.");
+    }
+
+    scanner.close();
+  }
+}
+```
+
+---
+
+### 🧠 Conceptos Clave Aplicados
+
+| Componente / Método | ¿Para qué se utiliza en este ejercicio? |
+| :--- | :--- |
+| `new char[PalabraSecreta.length()]` | Crea un arreglo de caracteres con la misma longitud que la palabra secreta. |
+| `Character.toLowerCase(...)` | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas. |
+| `scanner.next().charAt(0)` | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`). |
+| `PalabraSecreta.charAt(i)` | Compara cada letra de la palabra secreta con la letra ingresada en el bucle. |
+| `String.valueOf(LetrasAdivinadas)` | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
+| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`). |
+| `if (!LetraCorrecta)` | Bandera de estado booleana para descontar intentos únicamente tras fallar. |
+
+---
+
+### 🔄 Flujo de Ejecución del Programa
+
+1. **Inicialización:** Se genera la máscara inicial con guiones (`____________`) usando un arreglo `char[]` y un bucle `for`.
+2. **Ciclo de Turnos (`while`):**
+   - Muestra el estado del tablero con las letras descubiertas hasta el momento.
+   - Pide al usuario ingresar una letra y la procesa en minúscula.
+   - Recorre la palabra secreta: si la letra existe, reemplaza los guiones en sus posiciones correspondientes y marca `LetraCorrecta = true`.
+   - Si no acertó (`!LetraCorrecta`), descuenta un intento y notifica al usuario.
+   - Comprueba si todas las letras fueron adivinadas con `String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)`.
+3. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
+
+
