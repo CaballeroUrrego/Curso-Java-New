@@ -205,6 +205,7 @@ numeros[2] = 70; // El elemento en el índice 2 pasa de 30 a 70
 ### 🔄 Formas de Recorrer un Arreglo
 
 #### 1. Bucle `for-each` (Bucle Mejorado)
+
 Recorre cada elemento secuencialmente sin necesidad de gestionar manualmente la condición de parada o el índice:
 
 ```java
@@ -217,6 +218,7 @@ for (int numero : numeros) {
 ```
 
 #### 2. Bucle `for` Clásico usando `.length`
+
 Permite tener control total sobre el índice durante la iteración:
 
 ```java
@@ -242,6 +244,7 @@ for (int index = 0; index < numeros.length; index++) {
 En este ejercicio práctico se integran los conceptos fundamentales aprendidos hasta el momento: **Manejo de Cadenas (`String`)**, **Arreglos (`char[]`)**, **Estructuras de Control Condicionales (`if/else`)** e **Iterativas (`while`, `for`)**, y **Entrada de Datos por Consola (`Scanner`)**.
 
 ### 🎯 Objetivo del Juego
+
 Adivinar una palabra secreta carácter por carácter antes de que se agoten los intentos permitidos (en este caso, 10 intentos).
 
 ---
@@ -277,7 +280,7 @@ public class Ahorcado {
       System.out.println(
           "Palabra a adivinar : " + String.valueOf(LetrasAdivinadas) + " (" + PalabraSecreta.length() + " letras)");
       System.out.println("Introduce una letra, por favor");
-      
+
       // Capturamos el primer carácter introducido y lo convertimos a minúscula
       char letra = Character.toLowerCase(scanner.next().charAt(0));
 
@@ -319,27 +322,136 @@ public class Ahorcado {
 
 ### 🧠 Conceptos Clave Aplicados
 
-| Componente / Método | ¿Para qué se utiliza en este ejercicio? |
-| :--- | :--- |
-| `new char[PalabraSecreta.length()]` | Crea un arreglo de caracteres con la misma longitud que la palabra secreta. |
-| `Character.toLowerCase(...)` | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas. |
-| `scanner.next().charAt(0)` | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`). |
-| `PalabraSecreta.charAt(i)` | Compara cada letra de la palabra secreta con la letra ingresada en el bucle. |
-| `String.valueOf(LetrasAdivinadas)` | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
-| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`). |
-| `if (!LetraCorrecta)` | Bandera de estado booleana para descontar intentos únicamente tras fallar. |
+| Componente / Método                                       | ¿Para qué se utiliza en este ejercicio?                                                   |
+| :-------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| `new char[PalabraSecreta.length()]`                       | Crea un arreglo de caracteres con la misma longitud que la palabra secreta.               |
+| `Character.toLowerCase(...)`                              | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas.  |
+| `scanner.next().charAt(0)`                                | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`).  |
+| `PalabraSecreta.charAt(i)`                                | Compara cada letra de la palabra secreta con la letra ingresada en el bucle.              |
+| `String.valueOf(LetrasAdivinadas)`                        | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
+| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`).                 |
+| `if (!LetraCorrecta)`                                     | Bandera de estado booleana para descontar intentos únicamente tras fallar.                |
 
 ---
 
 ### 🔄 Flujo de Ejecución del Programa
 
-1. **Inicialización:** Se genera la máscara inicial con guiones (`____________`) usando un arreglo `char[]` y un bucle `for`.
-2. **Ciclo de Turnos (`while`):**
+1. **Ciclo de Turnos (`while`):**
    - Muestra el estado del tablero con las letras descubiertas hasta el momento.
    - Pide al usuario ingresar una letra y la procesa en minúscula.
    - Recorre la palabra secreta: si la letra existe, reemplaza los guiones en sus posiciones correspondientes y marca `LetraCorrecta = true`.
    - Si no acertó (`!LetraCorrecta`), descuenta un intento y notifica al usuario.
    - Comprueba si todas las letras fueron adivinadas con `String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)`.
-3. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
+2. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
 
+---
 
+## 16/09/2026
+
+## 🧱 Introducción a la Programación Orientada a Objetos (POO)
+
+En esta sesión se da el salto fundamental de la programación estructurada/procedimental hacia la **Programación Orientada a Objetos (POO)**. Este paradigma permite estructurar el código modelando elementos y conceptos del mundo real mediante **clases** (plantillas o moldes) y **objetos** (instancias creadas a partir de dichas plantillas).
+
+---
+
+### 🎯 Conceptos Fundamentales
+
+1. **Clase (`class`):** Es el molde, plano o plantilla conceptual. Define qué características (atributos) y qué acciones (métodos) tendrán los elementos que se fabriquen a partir de ella.
+2. **Objeto / Instancia:** Es el elemento real y concreto que se crea en memoria a partir de una clase mediante la palabra reservada `new`. Cada objeto tiene su propio espacio de memoria e identidad.
+3. **Atributos (Estado / Características):** Son las variables declaradas dentro de la clase. Almacenan los datos que describen el estado particular de cada objeto.
+4. **Métodos (Comportamiento / Acciones):** Son bloques de código (funciones) asociadas al objeto que definen lo que este puede hacer o cómo responde ante ciertas solicitudes.
+
+---
+
+### 💻 Código Implementado
+
+El ejercicio se divide en dos archivos para mantener la separación de responsabilidades:
+
+#### 1. Definición del Molde: `Persona.java`
+
+```java
+public class Persona {
+  // Atributos y características de un objeto (Estado)
+  String Nombre;
+  String Apellido;
+  int Edad;
+
+  // Métodos: Son los comportamientos de un objeto (Acciones)
+
+  // Método sin parámetros: procesa y concatena atributos del propio objeto
+  public String darNombreCompleto() {
+    return Apellido + ", " + Nombre;
+  }
+
+  // Método con parámetros y lógica condicional:
+  // Evalúa la edad del objeto para determinar el tipo de saludo
+  public String enviarSaludo(String saludado) {
+    if (Edad > 40) return "Buenos dias, querido " + saludado;
+    return "Hola, ¿como estas " + saludado + "?";
+  }
+}
+```
+
+#### 2. Creación y Uso de Instancias: `App.java`
+
+```java
+public class App {
+        public static void main(String[] args) throws Exception {
+                Persona persona1 = new Persona();
+                persona1.Nombre = "Leonardo";
+                persona1.Apellido = "Dicaprio";
+                persona1.Edad = 25;
+                // Creación del segundo objeto independiente (persona2)
+                Persona persona2 = new Persona();
+                persona2.Nombre = "Mariana";
+                persona2.Apellido = "Alvarez";
+                persona2.Edad = 46;
+
+                String saludado = " Desarollador Urrego";
+                // Invocación del método darNombreCompleto() y lectura de atributos
+
+                // persona 1
+                System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad + " años.");
+                // persona 2
+                System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad + " años.");
+
+                System.out.println(persona1.enviarSaludo(saludado));
+                System.out.println(persona2.enviarSaludo(" Desarollador"));
+        }
+
+}
+```
+
+---
+
+### 🧠 Conceptos Clave Aplicados
+
+| Concepto / Sintaxis                           | ¿Para qué se utiliza en este ejercicio?                                                                                                                             |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Persona persona1 = new Persona();`           | **Instanciación:** Crea un objeto nuevo en memoria a partir de la clase `Persona`.                                                                                  |
+| `persona1.Nombre = "Sebastian";`              | **Operador punto (`.`):** Permite acceder y asignar valores a los atributos públicos de cada objeto.                                                                |
+| `public String darNombreCompleto()`           | **Método con retorno (`return`):** Devuelve una cadena con formato `"Apellido, Nombre"` leyendo los atributos internos de la instancia.                             |
+| `public String enviarSaludo(String saludado)` | **Paso de parámetros y lógica interna:** Recibe un valor exterior (`saludado`) y lo combina con el estado interno (`Edad > 40`) para decidir la respuesta adecuada. |
+| **Independencia de Instancias**               | Aunque `persona1` y `persona2` provienen de la misma clase, sus datos en memoria son totalmente aislados e independientes.                                          |
+
+---
+
+### 🔄 Flujo de Ejecución y Salida en Consola
+
+1. **Instanciación:** Se reservan dos espacios de memoria distintos para `persona1` y `persona2`.
+2. **Asignación de Estado:** Se asignan los nombres, apellidos y edades correspondientes a cada sujeto.
+3. **Formateo de Nombre:** Ambos objetos invocan su método `darNombreCompleto()`, imprimiendo el formato estándar configurado en la clase.
+4. **Evaluación Condicional según Estado:**
+   - Para `persona1` (Edad 25): la condición `25 > 40` resulta `false`, produciendo un saludo casual.
+   - Para `persona2` (Edad 46): la condición `46 > 40` resulta `true`, produciendo un saludo formal y respetuoso.
+
+#### 🖥️ Salida en Consola:
+
+```text
+Dicaprio, Leonardo, tiene 25 años.
+Alvarez, Mariana, tiene 46 años.
+Hola, ¿como estas Desarollador Urrego?
+Buenos dias,querido Desarollador
+```
+
+---
