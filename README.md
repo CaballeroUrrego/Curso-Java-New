@@ -644,3 +644,130 @@ Alvarez, Mariana, tiene 46 años y eta cursando Ingenieria en sistemas
 
 ---
 
+## 18/09/2026
+
+## 🏗️ Constructores, la Palabra Clave `this` y Sobrecarga de Constructores
+
+En esta sesión se optimiza la creación de objetos en Java mediante el uso de **Constructores**. Anteriormente, los atributos se asignaban manualmente uno por uno después de crear la instancia (`persona1.Nombre = ...;`). Con los constructores, el objeto nace completamente inicializado y en un estado coherente desde el primer momento.
+
+---
+
+### 🎯 Conceptos Fundamentales
+
+1. **¿Qué es un Constructor?**
+   - Es un bloque de código especial que se ejecuta automáticamente al instanciar un objeto con el operador `new`.
+   - **Reglas obligatorias:**
+     - Lleva **exactamente el mismo nombre** de la clase (respetando mayúsculas y minúsculas).
+     - **No define ningún tipo de retorno** (ni siquiera `void`).
+   - **Propósito:** Inicializar atributos, reservar recursos y garantizar que el objeto no quede con datos nulos o inconsistentes.
+
+2. **La Palabra Clave `this`:**
+   - Es una referencia que apunta al **objeto actual** que está ejecutando el código.
+   - **Resolución de Ambigüedad (*Shadowing*):** Si el parámetro recibido en el constructor tiene el mismo nombre que el atributo de la clase, se utiliza `this.atributo = parametro;` para diferenciar la variable de instancia del parámetro local.
+
+3. **Sobrecarga de Constructores (*Constructor Overloading*):**
+   - Java permite definir más de un constructor en la misma clase, siempre y cuando tengan **diferente número o tipo de parámetros** (diferente firma).
+   - Esto otorga flexibilidad: se puede instanciar un objeto con todos sus datos completos o solo con los datos básicos indispensables.
+
+---
+
+### 💻 Código Implementado
+
+#### 1. Constructores en `Carrera.java`
+
+```java
+public class Carrera {
+  String nombre;
+  int duracion;
+  boolean estaEnCurso;
+
+  // Constructor Completo: inicializa todos los atributos
+  public Carrera(String nombre, int duracion, boolean estaEnCurso) {
+    this.nombre = nombre;
+    this.duracion = duracion;
+    this.estaEnCurso = estaEnCurso;
+  }
+
+  // Constructor Sobrecargado: solo requiere el nombre de la carrera
+  public Carrera(String nombre) {
+    this.nombre = nombre;
+  }
+}
+```
+
+#### 2. Constructores y Composición en `Persona.java`
+
+```java
+public class Persona {
+  // Atributos
+  String Nombre;
+  String Apellido;
+  int Edad;
+  Carrera carrera;
+
+  // Constructor 1 (Completo): recibe los datos de la persona y de la carrera
+  public Persona(String nombre, String apellido, int edad, String nombreCarrera, int duracionCarrera,
+      boolean estaEnCurso) {
+    // Instancia internamente la Carrera llamando a su constructor
+    carrera = new Carrera(nombreCarrera, duracionCarrera, estaEnCurso);
+    this.Nombre = nombre;
+    this.Apellido = apellido;
+    this.Edad = edad;
+  }
+
+  // Constructor 2 (Sobrecarga): crea la carrera usando solo su nombre
+  public Persona(String nombre, String apellido, int edad, String nombreCarrera) {
+    carrera = new Carrera(nombreCarrera);
+    this.Nombre = nombre;
+    this.Apellido = apellido;
+    this.Edad = edad;
+  }
+
+  // Métodos
+  public String darNombreCompleto() {
+    return Apellido + ", " + Nombre;
+  }
+
+  public String enviarSaludo(String saludado) {
+    if (Edad > 40)
+      return "Buenos dias,querido" + saludado;
+    return "Hola, ¿como estas" + saludado + "?";
+  }
+}
+```
+
+#### 3. Uso en `App.java`
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+        // Creación limpia en una sola línea gracias al constructor
+        Persona persona1 = new Persona("pedro", "Pascal", 40, "Mandaloriano", 5, true);
+
+        // Impresión de datos
+        System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad
+                + " años y esta recibida de " + persona1.carrera.nombre);
+    }
+}
+```
+
+---
+
+### 🧠 Tabla Comparativa: Asignación Manual vs Constructores
+
+| Característica | Asignación Manual Anterior | Con Constructores |
+| :--- | :--- | :--- |
+| **Líneas de código** | Múltiples líneas (`obj.a = ...; obj.b = ...;`) | Una sola línea compacta (`new Clase(arg1, arg2);`) |
+| **Riesgo de `null`** | Alto (si olvidas asignar un atributo queda en `null` o `0`) | Mínimo (el constructor exige los parámetros obligatorios) |
+| **Encapsulación** | Débil (los atributos debían ser accesibles directamente) | Fuerte (prepara el camino para hacerlos `private`) |
+| **Flexibilidad** | Sin control de opciones de inicio | Alta (mediante sobrecarga de constructores) |
+
+---
+
+### 🖥️ Salida en Consola:
+
+```text
+Pascal, pedro, tiene 40 años y esta recibida de Mandaloriano
+```
+
+---
