@@ -205,6 +205,7 @@ numeros[2] = 70; // El elemento en el índice 2 pasa de 30 a 70
 ### 🔄 Formas de Recorrer un Arreglo
 
 #### 1. Bucle `for-each` (Bucle Mejorado)
+
 Recorre cada elemento secuencialmente sin necesidad de gestionar manualmente la condición de parada o el índice:
 
 ```java
@@ -217,6 +218,7 @@ for (int numero : numeros) {
 ```
 
 #### 2. Bucle `for` Clásico usando `.length`
+
 Permite tener control total sobre el índice durante la iteración:
 
 ```java
@@ -242,6 +244,7 @@ for (int index = 0; index < numeros.length; index++) {
 En este ejercicio práctico se integran los conceptos fundamentales aprendidos hasta el momento: **Manejo de Cadenas (`String`)**, **Arreglos (`char[]`)**, **Estructuras de Control Condicionales (`if/else`)** e **Iterativas (`while`, `for`)**, y **Entrada de Datos por Consola (`Scanner`)**.
 
 ### 🎯 Objetivo del Juego
+
 Adivinar una palabra secreta carácter por carácter antes de que se agoten los intentos permitidos (en este caso, 10 intentos).
 
 ---
@@ -277,7 +280,7 @@ public class Ahorcado {
       System.out.println(
           "Palabra a adivinar : " + String.valueOf(LetrasAdivinadas) + " (" + PalabraSecreta.length() + " letras)");
       System.out.println("Introduce una letra, por favor");
-      
+
       // Capturamos el primer carácter introducido y lo convertimos a minúscula
       char letra = Character.toLowerCase(scanner.next().charAt(0));
 
@@ -319,27 +322,325 @@ public class Ahorcado {
 
 ### 🧠 Conceptos Clave Aplicados
 
-| Componente / Método | ¿Para qué se utiliza en este ejercicio? |
-| :--- | :--- |
-| `new char[PalabraSecreta.length()]` | Crea un arreglo de caracteres con la misma longitud que la palabra secreta. |
-| `Character.toLowerCase(...)` | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas. |
-| `scanner.next().charAt(0)` | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`). |
-| `PalabraSecreta.charAt(i)` | Compara cada letra de la palabra secreta con la letra ingresada en el bucle. |
-| `String.valueOf(LetrasAdivinadas)` | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
-| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`). |
-| `if (!LetraCorrecta)` | Bandera de estado booleana para descontar intentos únicamente tras fallar. |
+| Componente / Método                                       | ¿Para qué se utiliza en este ejercicio?                                                   |
+| :-------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| `new char[PalabraSecreta.length()]`                       | Crea un arreglo de caracteres con la misma longitud que la palabra secreta.               |
+| `Character.toLowerCase(...)`                              | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas.  |
+| `scanner.next().charAt(0)`                                | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`).  |
+| `PalabraSecreta.charAt(i)`                                | Compara cada letra de la palabra secreta con la letra ingresada en el bucle.              |
+| `String.valueOf(LetrasAdivinadas)`                        | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
+| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`).                 |
+| `if (!LetraCorrecta)`                                     | Bandera de estado booleana para descontar intentos únicamente tras fallar.                |
 
 ---
 
 ### 🔄 Flujo de Ejecución del Programa
 
-1. **Inicialización:** Se genera la máscara inicial con guiones (`____________`) usando un arreglo `char[]` y un bucle `for`.
-2. **Ciclo de Turnos (`while`):**
+1. **Ciclo de Turnos (`while`):**
    - Muestra el estado del tablero con las letras descubiertas hasta el momento.
    - Pide al usuario ingresar una letra y la procesa en minúscula.
    - Recorre la palabra secreta: si la letra existe, reemplaza los guiones en sus posiciones correspondientes y marca `LetraCorrecta = true`.
    - Si no acertó (`!LetraCorrecta`), descuenta un intento y notifica al usuario.
    - Comprueba si todas las letras fueron adivinadas con `String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)`.
-3. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
+2. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
 
+---
+
+## 16/09/2026
+
+## 🧱 Introducción a la Programación Orientada a Objetos (POO)
+
+En esta sesión se da el salto fundamental de la programación estructurada/procedimental hacia la **Programación Orientada a Objetos (POO)**. Este paradigma permite estructurar el código modelando elementos y conceptos del mundo real mediante **clases** (plantillas o moldes) y **objetos** (instancias creadas a partir de dichas plantillas).
+
+---
+
+### 🎯 Conceptos Fundamentales
+
+1. **Clase (`class`):** Es el molde, plano o plantilla conceptual. Define qué características (atributos) y qué acciones (métodos) tendrán los elementos que se fabriquen a partir de ella.
+2. **Objeto / Instancia:** Es el elemento real y concreto que se crea en memoria a partir de una clase mediante la palabra reservada `new`. Cada objeto tiene su propio espacio de memoria e identidad.
+3. **Atributos (Estado / Características):** Son las variables declaradas dentro de la clase. Almacenan los datos que describen el estado particular de cada objeto.
+4. **Métodos (Comportamiento / Acciones):** Son bloques de código (funciones) asociadas al objeto que definen lo que este puede hacer o cómo responde ante ciertas solicitudes.
+
+---
+
+### 💻 Código Implementado
+
+El ejercicio se divide en dos archivos para mantener la separación de responsabilidades:
+
+#### 1. Definición del Molde: `Persona.java`
+
+```java
+public class Persona {
+  // Atributos y características de un objeto (Estado)
+  String Nombre;
+  String Apellido;
+  int Edad;
+
+  // Métodos: Son los comportamientos de un objeto (Acciones)
+
+  // Método sin parámetros: procesa y concatena atributos del propio objeto
+  public String darNombreCompleto() {
+    return Apellido + ", " + Nombre;
+  }
+
+  // Método con parámetros y lógica condicional:
+  // Evalúa la edad del objeto para determinar el tipo de saludo
+  public String enviarSaludo(String saludado) {
+    if (Edad > 40) return "Buenos dias, querido " + saludado;
+    return "Hola, ¿como estas " + saludado + "?";
+  }
+}
+```
+
+#### 2. Creación y Uso de Instancias: `App.java`
+
+```java
+public class App {
+        public static void main(String[] args) throws Exception {
+                Persona persona1 = new Persona();
+                persona1.Nombre = "Leonardo";
+                persona1.Apellido = "Dicaprio";
+                persona1.Edad = 25;
+                // Creación del segundo objeto independiente (persona2)
+                Persona persona2 = new Persona();
+                persona2.Nombre = "Mariana";
+                persona2.Apellido = "Alvarez";
+                persona2.Edad = 46;
+
+                String saludado = " Desarollador Urrego";
+                // Invocación del método darNombreCompleto() y lectura de atributos
+
+                // persona 1
+                System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad + " años.");
+                // persona 2
+                System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad + " años.");
+
+                System.out.println(persona1.enviarSaludo(saludado));
+                System.out.println(persona2.enviarSaludo(" Desarollador"));
+        }
+
+}
+```
+
+---
+
+### 🧠 Conceptos Clave Aplicados
+
+| Concepto / Sintaxis                           | ¿Para qué se utiliza en este ejercicio?                                                                                                                             |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Persona persona1 = new Persona();`           | **Instanciación:** Crea un objeto nuevo en memoria a partir de la clase `Persona`.                                                                                  |
+| `persona1.Nombre = "Sebastian";`              | **Operador punto (`.`):** Permite acceder y asignar valores a los atributos públicos de cada objeto.                                                                |
+| `public String darNombreCompleto()`           | **Método con retorno (`return`):** Devuelve una cadena con formato `"Apellido, Nombre"` leyendo los atributos internos de la instancia.                             |
+| `public String enviarSaludo(String saludado)` | **Paso de parámetros y lógica interna:** Recibe un valor exterior (`saludado`) y lo combina con el estado interno (`Edad > 40`) para decidir la respuesta adecuada. |
+| **Independencia de Instancias**               | Aunque `persona1` y `persona2` provienen de la misma clase, sus datos en memoria son totalmente aislados e independientes.                                          |
+
+---
+
+### 🔄 Flujo de Ejecución y Salida en Consola
+
+1. **Instanciación:** Se reservan dos espacios de memoria distintos para `persona1` y `persona2`.
+2. **Asignación de Estado:** Se asignan los nombres, apellidos y edades correspondientes a cada sujeto.
+3. **Formateo de Nombre:** Ambos objetos invocan su método `darNombreCompleto()`, imprimiendo el formato estándar configurado en la clase.
+4. **Evaluación Condicional según Estado:**
+   - Para `persona1` (Edad 25): la condición `25 > 40` resulta `false`, produciendo un saludo casual.
+   - Para `persona2` (Edad 46): la condición `46 > 40` resulta `true`, produciendo un saludo formal y respetuoso.
+
+#### 🖥️ Salida en Consola:
+
+```text
+Dicaprio, Leonardo, tiene 25 años.
+Alvarez, Mariana, tiene 46 años.
+Hola, ¿como estas Desarollador Urrego?
+Buenos dias,querido Desarollador
+```
+
+---
+
+## 17/09/2026
+
+## 🔗 Relaciones entre Clases: Atributos de Tipo Objeto (Composición y Asociación)
+
+En esta sesión se da un salto fundamental en el diseño de software orientado a objetos: **hacer que dos o más clases colaboren entre sí**. En lugar de almacenar únicamente tipos de datos simples (`int`, `boolean`, `String`), una clase puede tener como atributo **una instancia de otra clase**.
+
+A este principio en POO se le conoce como la relación **"Tiene-Un" (*Has-A*)**.
+
+---
+
+### 💡 ¿Por qué no poner los atributos directamente en `Persona`?
+
+Podríamos haber agregado en `Persona.java` variables como `String nombreCarrera;` o `int duracionCarrera;`. Sin embargo, separar los conceptos en clases independientes aporta grandes ventajas:
+
+1. **Modularidad y Responsabilidad Única:** La clase `Persona` se encarga únicamente de los datos humanos (nombre, apellido, edad), mientras que `Carrera` se responsabiliza de la información académica.
+2. **Reutilización:** La misma clase `Carrera` puede reutilizarse en el futuro para universidades, facultades o registros de inscripción sin duplicar código.
+3. **Escalabilidad:** Si en el futuro una carrera necesita más datos (como materias, créditos o promedio de aprobación), solo se modifica `Carrera.java` sin alterar el molde de `Persona`.
+
+---
+
+### 🗺️ Representación Visual en Memoria (Heap)
+
+Cuando creamos los objetos y los vinculamos en Java, ocurre lo siguiente en la memoria:
+
+```mermaid
+classDiagram
+    class Persona {
+        +String Nombre
+        +String Apellido
+        +int Edad
+        +Carrera carrera
+        +darNombreCompleto() String
+        +enviarSaludo(String) String
+    }
+
+    class Carrera {
+        +String nombre
+        +int duracion
+        +boolean estaEnCurso
+    }
+
+    Persona "1" o-- "1" Carrera : tiene una (Asociación)
+```
+
+En memoria, `persona1.carrera` no almacena físicamente una copia de la carrera, sino un **puntero o referencia** que apunta directamente a la dirección de memoria donde se encuentra `carrera1`.
+
+---
+
+### 💻 Código Implementado y Análisis Paso a Paso
+
+El avance involucra tres archivos dentro de `src/`:
+
+#### 1. Definición del Objeto Componente: `Carrera.java`
+
+```java
+public class Carrera {
+  String nombre;       // Denominación oficial de la carrera universitaria
+  int duracion;        // Tiempo estimado de la carrera expresado en años
+  boolean estaEnCurso; // Estado actual: true (estudiando) | false (egresado/graduado)
+}
+```
+
+- **Propósito:** Actúa como plantilla para representar cualquier titulación académica de forma aislada.
+
+#### 2. Definición del Objeto Contenedor: `Persona.java`
+
+```java
+public class Persona {
+  // Atributos y características de un objeto
+  String Nombre;
+  String Apellido;
+  int Edad;
+  
+  // Atributo de tipo objeto: Relación Has-A ("Una persona TIENE UNA carrera")
+  Carrera carrera;
+
+  // Métodos: Comportamientos del objeto
+  public String darNombreCompleto() {
+    return Apellido + ", " + Nombre;
+  }
+
+  public String enviarSaludo(String saludado) {
+    if (Edad > 40)
+      return "Buenos dias,querido" + saludado;
+    return "Hola, ¿como estas" + saludado + "?";
+  }
+}
+```
+
+> [!NOTE]
+> Al declarar `Carrera carrera;`, el valor por defecto de este atributo antes de asignarle un objeto es **`null`** (no apunta a ninguna dirección de memoria).
+
+#### 3. Instanciación, Enlace e Impresión: `App.java`
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+        // ==========================================
+        // CASO 1: Leonardo DiCaprio (Graduado)
+        // ==========================================
+        Persona persona1 = new Persona();
+        persona1.Nombre = "Leonardo";
+        persona1.Apellido = "Dicaprio";
+        persona1.Edad = 25;
+
+        // Se crea el objeto Carrera de forma independiente
+        Carrera carrera1 = new Carrera();
+        carrera1.nombre = "Ingenieria en computacion";
+        carrera1.duracion = 6;
+        carrera1.estaEnCurso = false; // Ya no cursa, está recibido
+
+        // VINCULACIÓN: Se enlaza carrera1 a persona1
+        persona1.carrera = carrera1;
+
+        // ==========================================
+        // CASO 2: Mariana Álvarez (Cursando actualmente)
+        // ==========================================
+        Persona persona2 = new Persona();
+        persona2.Nombre = "Mariana";
+        persona2.Apellido = "Alvarez";
+        persona2.Edad = 46;
+
+        // Se crea la segunda Carrera independiente
+        Carrera carrera2 = new Carrera();
+        carrera2.nombre = "Ingenieria en sistemas";
+        carrera2.duracion = 6;
+        carrera2.estaEnCurso = true; // Sigue estudiando
+
+        // VINCULACIÓN: Se enlaza carrera2 a persona2
+        persona2.carrera = carrera2;
+
+        String saludado = " Desarollador Urrego";
+
+        // ==========================================
+        // LECTURA CON ACCESO ENCADENADO
+        // ==========================================
+        // Para persona 1:
+        System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad 
+            + " años y esta recibido de " + persona1.carrera.nombre);
+        
+        // Para persona 2:
+        System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad
+            + " años y eta cursando " + persona2.carrera.nombre);
+
+        // System.out.println(persona1.enviarSaludo(saludado));
+        // System.out.println(persona2.enviarSaludo(" Desarollador"));
+    }
+}
+```
+
+---
+
+### 🔍 Análisis Detallado del Mecanismo de Enlace
+
+#### ¿Cómo funciona el Acceso Encadenado (`persona1.carrera.nombre`)?
+1. `persona1`: Se accede a la instancia de la persona.
+2. `.carrera`: Se sigue la referencia interna hacia el objeto `Carrera` vinculado (`carrera1`).
+3. `.nombre`: Se obtiene el valor del atributo `nombre` contenido dentro de ese objeto de carrera (`"Ingenieria en computacion"`).
+
+> [!WARNING]
+> **El Error Común: `NullPointerException` (NPE)**
+> Si intentas ejecutar `System.out.println(persona1.carrera.nombre);` **antes** de la línea `persona1.carrera = carrera1;`, el programa lanzará un error en tiempo de ejecución (`java.lang.NullPointerException`). Esto ocurre porque `carrera` aún valdría `null`, y Java no puede buscar un atributo `.nombre` en un objeto inexistente en memoria.
+
+---
+
+### 🧠 Tabla de Conceptos Clave Aplicados
+
+| Sintaxis / Concepto | Significado Técnico | Utilidad Práctica |
+| :--- | :--- | :--- |
+| `Carrera carrera;` | Atributo por referencia | Permite que una clase guarde la dirección de memoria de otro objeto. |
+| `new Carrera();` | Instanciación | Reserva espacio en memoria Heap para alojar los datos de una nueva carrera. |
+| `persona1.carrera = carrera1;` | Enlace / Asociación | Conecta ambas entidades asignando la referencia del objeto `carrera1` a la propiedad interna de `persona1`. |
+| `persona1.carrera.nombre` | Operador punto encadenado | Permite navegar niveles de objetos anidados para leer o modificar datos profundos. |
+| `carrera.estaEnCurso` | Bandera de estado (`boolean`) | Determina la lógica de negocio (si la persona ya es graduada o sigue siendo estudiante). |
+
+---
+
+### 🖥️ Salida en Consola y Validación
+
+Al compilar y ejecutar `App.java`, la salida final verificada es:
+
+```text
+Dicaprio, Leonardo, tiene 25 años y esta recibido de Ingenieria en computacion
+Alvarez, Mariana, tiene 46 años y eta cursando Ingenieria en sistemas
+```
+
+---
 
