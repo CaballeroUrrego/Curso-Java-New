@@ -455,3 +455,192 @@ Buenos dias,querido Desarollador
 ```
 
 ---
+
+## 17/09/2026
+
+## 🔗 Relaciones entre Clases: Atributos de Tipo Objeto (Composición y Asociación)
+
+En esta sesión se da un salto fundamental en el diseño de software orientado a objetos: **hacer que dos o más clases colaboren entre sí**. En lugar de almacenar únicamente tipos de datos simples (`int`, `boolean`, `String`), una clase puede tener como atributo **una instancia de otra clase**.
+
+A este principio en POO se le conoce como la relación **"Tiene-Un" (*Has-A*)**.
+
+---
+
+### 💡 ¿Por qué no poner los atributos directamente en `Persona`?
+
+Podríamos haber agregado en `Persona.java` variables como `String nombreCarrera;` o `int duracionCarrera;`. Sin embargo, separar los conceptos en clases independientes aporta grandes ventajas:
+
+1. **Modularidad y Responsabilidad Única:** La clase `Persona` se encarga únicamente de los datos humanos (nombre, apellido, edad), mientras que `Carrera` se responsabiliza de la información académica.
+2. **Reutilización:** La misma clase `Carrera` puede reutilizarse en el futuro para universidades, facultades o registros de inscripción sin duplicar código.
+3. **Escalabilidad:** Si en el futuro una carrera necesita más datos (como materias, créditos o promedio de aprobación), solo se modifica `Carrera.java` sin alterar el molde de `Persona`.
+
+---
+
+### 🗺️ Representación Visual en Memoria (Heap)
+
+Cuando creamos los objetos y los vinculamos en Java, ocurre lo siguiente en la memoria:
+
+```mermaid
+classDiagram
+    class Persona {
+        +String Nombre
+        +String Apellido
+        +int Edad
+        +Carrera carrera
+        +darNombreCompleto() String
+        +enviarSaludo(String) String
+    }
+
+    class Carrera {
+        +String nombre
+        +int duracion
+        +boolean estaEnCurso
+    }
+
+    Persona "1" o-- "1" Carrera : tiene una (Asociación)
+```
+
+En memoria, `persona1.carrera` no almacena físicamente una copia de la carrera, sino un **puntero o referencia** que apunta directamente a la dirección de memoria donde se encuentra `carrera1`.
+
+---
+
+### 💻 Código Implementado y Análisis Paso a Paso
+
+El avance involucra tres archivos dentro de `src/`:
+
+#### 1. Definición del Objeto Componente: `Carrera.java`
+
+```java
+public class Carrera {
+  String nombre;       // Denominación oficial de la carrera universitaria
+  int duracion;        // Tiempo estimado de la carrera expresado en años
+  boolean estaEnCurso; // Estado actual: true (estudiando) | false (egresado/graduado)
+}
+```
+
+- **Propósito:** Actúa como plantilla para representar cualquier titulación académica de forma aislada.
+
+#### 2. Definición del Objeto Contenedor: `Persona.java`
+
+```java
+public class Persona {
+  // Atributos y características de un objeto
+  String Nombre;
+  String Apellido;
+  int Edad;
+  
+  // Atributo de tipo objeto: Relación Has-A ("Una persona TIENE UNA carrera")
+  Carrera carrera;
+
+  // Métodos: Comportamientos del objeto
+  public String darNombreCompleto() {
+    return Apellido + ", " + Nombre;
+  }
+
+  public String enviarSaludo(String saludado) {
+    if (Edad > 40)
+      return "Buenos dias,querido" + saludado;
+    return "Hola, ¿como estas" + saludado + "?";
+  }
+}
+```
+
+> [!NOTE]
+> Al declarar `Carrera carrera;`, el valor por defecto de este atributo antes de asignarle un objeto es **`null`** (no apunta a ninguna dirección de memoria).
+
+#### 3. Instanciación, Enlace e Impresión: `App.java`
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+        // ==========================================
+        // CASO 1: Leonardo DiCaprio (Graduado)
+        // ==========================================
+        Persona persona1 = new Persona();
+        persona1.Nombre = "Leonardo";
+        persona1.Apellido = "Dicaprio";
+        persona1.Edad = 25;
+
+        // Se crea el objeto Carrera de forma independiente
+        Carrera carrera1 = new Carrera();
+        carrera1.nombre = "Ingenieria en computacion";
+        carrera1.duracion = 6;
+        carrera1.estaEnCurso = false; // Ya no cursa, está recibido
+
+        // VINCULACIÓN: Se enlaza carrera1 a persona1
+        persona1.carrera = carrera1;
+
+        // ==========================================
+        // CASO 2: Mariana Álvarez (Cursando actualmente)
+        // ==========================================
+        Persona persona2 = new Persona();
+        persona2.Nombre = "Mariana";
+        persona2.Apellido = "Alvarez";
+        persona2.Edad = 46;
+
+        // Se crea la segunda Carrera independiente
+        Carrera carrera2 = new Carrera();
+        carrera2.nombre = "Ingenieria en sistemas";
+        carrera2.duracion = 6;
+        carrera2.estaEnCurso = true; // Sigue estudiando
+
+        // VINCULACIÓN: Se enlaza carrera2 a persona2
+        persona2.carrera = carrera2;
+
+        String saludado = " Desarollador Urrego";
+
+        // ==========================================
+        // LECTURA CON ACCESO ENCADENADO
+        // ==========================================
+        // Para persona 1:
+        System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad 
+            + " años y esta recibido de " + persona1.carrera.nombre);
+        
+        // Para persona 2:
+        System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad
+            + " años y eta cursando " + persona2.carrera.nombre);
+
+        // System.out.println(persona1.enviarSaludo(saludado));
+        // System.out.println(persona2.enviarSaludo(" Desarollador"));
+    }
+}
+```
+
+---
+
+### 🔍 Análisis Detallado del Mecanismo de Enlace
+
+#### ¿Cómo funciona el Acceso Encadenado (`persona1.carrera.nombre`)?
+1. `persona1`: Se accede a la instancia de la persona.
+2. `.carrera`: Se sigue la referencia interna hacia el objeto `Carrera` vinculado (`carrera1`).
+3. `.nombre`: Se obtiene el valor del atributo `nombre` contenido dentro de ese objeto de carrera (`"Ingenieria en computacion"`).
+
+> [!WARNING]
+> **El Error Común: `NullPointerException` (NPE)**
+> Si intentas ejecutar `System.out.println(persona1.carrera.nombre);` **antes** de la línea `persona1.carrera = carrera1;`, el programa lanzará un error en tiempo de ejecución (`java.lang.NullPointerException`). Esto ocurre porque `carrera` aún valdría `null`, y Java no puede buscar un atributo `.nombre` en un objeto inexistente en memoria.
+
+---
+
+### 🧠 Tabla de Conceptos Clave Aplicados
+
+| Sintaxis / Concepto | Significado Técnico | Utilidad Práctica |
+| :--- | :--- | :--- |
+| `Carrera carrera;` | Atributo por referencia | Permite que una clase guarde la dirección de memoria de otro objeto. |
+| `new Carrera();` | Instanciación | Reserva espacio en memoria Heap para alojar los datos de una nueva carrera. |
+| `persona1.carrera = carrera1;` | Enlace / Asociación | Conecta ambas entidades asignando la referencia del objeto `carrera1` a la propiedad interna de `persona1`. |
+| `persona1.carrera.nombre` | Operador punto encadenado | Permite navegar niveles de objetos anidados para leer o modificar datos profundos. |
+| `carrera.estaEnCurso` | Bandera de estado (`boolean`) | Determina la lógica de negocio (si la persona ya es graduada o sigue siendo estudiante). |
+
+---
+
+### 🖥️ Salida en Consola y Validación
+
+Al compilar y ejecutar `App.java`, la salida final verificada es:
+
+```text
+Dicaprio, Leonardo, tiene 25 años y esta recibido de Ingenieria en computacion
+Alvarez, Mariana, tiene 46 años y eta cursando Ingenieria en sistemas
+```
+
+---
+

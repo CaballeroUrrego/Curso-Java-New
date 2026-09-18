@@ -3,6 +3,8 @@ public class Persona {
   String Nombre;
   String Apellido;
   int Edad;
+  // Clase carrera es decir un atributo
+  Carrera carrera;
 
   // Metodos Son los comportamientos de un objeto
 
@@ -11,7 +13,8 @@ public class Persona {
   }
 
   public String enviarSaludo(String saludado) {
-    if (Edad > 40 ) return "Buenos dias,querido" + saludado;
+    if (Edad > 40)
+      return "Buenos dias,querido" + saludado;
     return "Hola, ¿como estas" + saludado + "?";
   }
 
