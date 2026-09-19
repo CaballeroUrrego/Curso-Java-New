@@ -37,13 +37,13 @@
 7. [📅 18/09/2026 — Constructores, Palabra Clave `this` y Encapsulamiento](#-18092026--constructores-palabra-clave-this-y-encapsulamiento)
    - [Constructores y Sobrecarga](#-constructores-y-sobrecarga-de-constructores)
    - [Encapsulamiento: Modificador `private`, Getters y Setters](#-encapsulamiento-modificador-private-getters-y-setters)
-8. [📅 18/09/2026 — Herencia, Palabra Clave `super` y Sobrescritura de Métodos (`@Override`)](#-18092026--herencia-palabra-clave-super-y-sobrescritura-de-métodos-override)
+8. [📅 18/09/2026 — Herencia, Palabra Clave `super`, Sobrescritura (`@Override`) y Miembros Estáticos (`static`)](#-18092026--herencia-palabra-clave-super-sobrescritura-de-métodos-override-y-miembros-estáticos-static)
    - [El Concepto de Herencia (Relación Es-Un / Is-A)](#-el-concepto-de-herencia-relación-es-un--is-a)
    - [Diagrama de Jerarquía de Clases (Mermaid)](#-diagrama-de-jerarquía-de-clases-mermaid)
    - [La Palabra Clave `super` y Constructores](#-la-palabra-clave-super-y-constructores)
    - [Sobrescritura de Métodos y Anotación `@Override`](#-sobrescritura-de-métodos-y-anotación-override)
-   - [Código Actual del Proyecto: Herencia](#-código-actual-del-proyecto-herencia)
-9. [🚀 Cómo Ejecutar el Proyecto](#-cómo-ejecutar-el-proyecto)
+   - [Miembros Estáticos (`static`) y Contador Global de Instancias](#-miembros-estáticos-static-y-contador-global-de-instancias)
+   - [Código Actual del Proyecto: Herencia y Atributos Estáticos](#-código-actual-del-proyecto-herencia-y-atributos-estáticos)
 
 ---
 
@@ -655,9 +655,9 @@ DARIN, RICARDO, tiene 60 años
 
 ---
 
-## 📅 18/09/2026 — Herencia, Palabra Clave `super` y Sobrescritura de Métodos (`@Override`)
+## 📅 18/09/2026 — Herencia, Palabra Clave `super`, Sobrescritura de Métodos (`@Override`) y Miembros Estáticos (`static`)
 
-En esta sesión se profundiza en el segundo gran pilar de la Programación Orientada a Objetos: la **Herencia**, permitiendo la reutilización de código, el modelado jerárquico del mundo real y la especialización de comportamientos mediante la sobreescritura de métodos.
+En esta sesión se profundiza en la Programación Orientada a Objetos mediante la **Herencia** (reutilización de código y jerarquías mediante `extends`), la invocación a la superclase con `super`, la especialización de comportamientos con `@Override`, y la gestión global de instancias utilizando miembros estáticos (`static`).
 
 ---
 
@@ -686,8 +686,10 @@ classDiagram
     class Animal {
         ~String nombre
         ~int edad
+        -static int contadorAnimales
         +Animal(String, int)
         +hacerSonido() String
+        +static getContadorAnimales() int
     }
 
     class Perro {
@@ -737,7 +739,20 @@ La **sobrescritura** (*Method Overriding*) permite que una subclase proporcione 
 
 ---
 
-### 💻 Código Actual del Proyecto: Herencia
+### 🔢 Miembros Estáticos (`static`) y Contador Global de Instancias
+
+La palabra clave **`static`** en Java indica que un atributo o método pertenece a la **clase en sí** y no a una instancia u objeto particular.
+
+- **Atributo Estático (`private static int contadorAnimales = 0;`):** Existe una única copia compartida en memoria para toda la clase `Animal` y todas sus subclases.
+- **Incremento en Constructor:** Cada vez que se crea un objeto mediante `new Animal(...)`, `new Gato(...)` o `new Perro(...)`, se ejecuta el constructor de `Animal` (los hijos lo invocan con `super(...)`), ejecutando `contadorAnimales++`.
+- **Método Estático (`public static int getContadorAnimales()`):** Permite consultar el valor del contador directamente a través de la clase sin requerir una instancia específica:
+  ```java
+  System.out.println(Animal.getContadorAnimales()); // Salida: 3
+  ```
+
+---
+
+### 💻 Código Actual del Proyecto: Herencia y Atributos Estáticos
 
 #### 1. Superclase Padre: `src/Animal.java`
 
@@ -746,14 +761,20 @@ public class Animal {
 
   String nombre;
   int edad;
+  private static int contadorAnimales = 0;
 
   public Animal(String nombre, int edad) {
     this.nombre = nombre;
     this.edad = edad;
+    contadorAnimales++;
   }
 
   public String hacerSonido() {
     return "grrr";
+  }
+
+  public static int getContadorAnimales() {
+    return contadorAnimales;
   }
 }
 ```
@@ -811,6 +832,7 @@ public class App {
 
         System.out.println("El perro llamado: " + perro.nombre + "hace:");
         System.out.println(perro.hacerSonido());
+        System.out.println("El total de animales es de : " + Animal.getContadorAnimales());
     }
 }
 ```
@@ -824,6 +846,7 @@ El gato llamado: Lucius hace:
 Miau
 El perro llamado: Firulais hace:
 Guau Guau 
+El total de animales es de : 3
 ```
 
 ---
