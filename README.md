@@ -44,6 +44,10 @@
    - [Sobrescritura de Métodos y Anotación `@Override`](#-sobrescritura-de-métodos-y-anotación-override)
    - [Miembros Estáticos (`static`) y Contador Global de Instancias](#-miembros-estáticos-static-y-contador-global-de-instancias)
    - [Código Actual del Proyecto: Herencia y Atributos Estáticos](#-código-actual-del-proyecto-herencia-y-atributos-estáticos)
+9. [📅 18/09/2026 — Clase `Veterinaria` y Atributos Estáticos](#-18092026--clase-veterinaria-y-atributos-estáticos)
+   - [Uso de `static` para datos globales](#-uso-de-static-para-datos-globales)
+   - [Código de la clase `Veterinaria`](#-código-de-la-clase-veterinaria)
+   - [Demostración en `App.java`](#-demostración-en-appjava)
 
 ---
 
@@ -848,6 +852,71 @@ Miau
 El perro llamado: Firulais hace:
 Guau Guau
 El total de animales es de : 3
+```
+
+---
+
+## 📅 18/09/2026 — Clase `Veterinaria` y Atributos Estáticos
+
+En este punto del proyecto agregamos una clase adicional llamada `Veterinaria` para representar el lugar donde se atienden a los animales. Aquí utilizamos un atributo `static`, que permite compartir una información global para toda la aplicación sin necesidad de crear un objeto nuevo.
+
+### 🔧 Uso de `static` para datos globales
+
+La palabra clave `static` indica que el atributo o método pertenece a la clase, no a una instancia particular. Esto es útil para datos comunes, como el nombre de la veterinaria.
+
+- `Veterinaria.nombre`: se puede acceder directamente desde cualquier parte del programa.
+- No requiere instanciar un objeto con `new Veterinaria()`.
+- El valor es compartido por toda la clase.
+
+---
+
+### 💻 Código de la clase `Veterinaria`
+
+```java
+public class Veterinaria {
+
+  static String nombre = "La veterinaria de Ricardo";
+
+}
+```
+
+---
+
+### 🧩 Demostración en `App.java`
+
+```java
+public class App {
+        public static void main(String[] args) throws Exception {
+
+                Animal animal = new Animal("Bestia ", 2000);
+                Gato gato = new Gato("Lucius ", 4);
+                Perro perro = new Perro("Firulais ", 3);
+
+                System.out.println("El animal llamado: " + animal.nombre + "hace:");
+                System.out.println(animal.hacerSonido());
+
+                System.out.println("El gato llamado: " + gato.nombre + "hace:");
+                System.out.println(gato.hacerSonido());
+
+                System.out.println("El perro llamado: " + perro.nombre + "hace:");
+                System.out.println(perro.hacerSonido());
+                System.out.println("El total de animales es de : " + Animal.getContadorAnimales());
+                System.out.println("Yo atiendo a mis animalitos en : " + Veterinaria.nombre);
+        }
+}
+```
+
+#### 🖥️ Salida en Consola:
+
+```text
+El animal llamado: Bestia hace:
+grrr
+El gato llamado: Lucius hace:
+Miau
+El perro llamado: Firulais hace:
+Guau Guau
+El total de animales es de : 3
+Yo atiendo a mis animalitos en : La veterinaria de Ricardo
 ```
 
 ---
