@@ -1,13 +1,20 @@
 public class App {
         public static void main(String[] args) throws Exception {
 
-                Persona persona1 = new Persona("pedro", "Pascal", 60);
-                persona1.setNombre("Ricardo");
-                persona1.setApellido("Darin");
-                // persona 1
-                // System.out.println(persona1.darNombreCompleto() + ", " + "tiene "
-                // + persona1.Edad + " años");
-                System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.getEdad() + " años");
+                //
+                Animal animal = new Animal("Bestia ", 2000);
+                Gato gato = new Gato("Lucius ", 4); // Gato hijo de animal
+                Perro perro = new Perro("Firulais ", 3); // Perro hijo de animal
+
+                System.out.println("El animal llamado: " + animal.nombre + "hace:");
+                System.out.println(animal.hacerSonido());
+
+                System.out.println("El gato llamado: " + gato.nombre + "hace:");
+                System.out.println(gato.hacerSonido());
+
+                System.out.println("El perro llamado: " + perro.nombre + "hace:");
+                System.out.println(perro.hacerSonido());
+
         }
 
 }
