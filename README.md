@@ -1,104 +1,154 @@
-# Manipulación de Cadenas de Texto (`String`) en Java
+# ☕ Curso Java desde Cero — Bitácora de Aprendizaje
 
-Este proyecto contiene un ejemplo práctico sobre el uso de la clase `String` en Java y los métodos esenciales para inspeccionar, transformar y manipular cadenas de texto.
+> Repositorio de apuntes, ejercicios prácticos y proyectos del curso **Java desde Cero** (por Sergie Code), desarrollado y documentado paso a paso por **Caballero Urrego Dev**.
 
 ---
 
-## 👨‍💻 Autor y Créditos
+## 👨‍💻 Información General
 
 - **Desarrollador:** Caballero Urrego Dev
-- **Fecha:** 07/09/2026
+- **Fecha de Inicio:** 07/09/2026
+- **Lenguaje:** Java (OpenJDK 17+)
+- **Entorno de Desarrollo:** Visual Studio Code / Antigravity IDE
+- **Objetivo:** Documentar el progreso diario, código fuente, explicaciones conceptuales y buenas prácticas de programación estructurada y Programación Orientada a Objetos (POO).
 
 ---
 
-## 📌 Descripción del Proyecto
+## 📑 Tabla de Contenidos
 
-El archivo `App.java` demuestra cómo trabajar con cadenas de texto utilizando una variable de prueba con espacios de relleno al inicio y al final:
-
-### 📌 Cadena de Ejemplo
-
-El programa utiliza la siguiente variable de prueba con espacios en blanco de relleno para evaluar el comportamiento de cada método:
-
-### 📌 Cadena de Ejemplo
-
-El programa utiliza la siguiente variable de prueba con espacios en blanco de relleno para evaluar el comportamiento de cada método:
-
-### 🛠️ Métodos Explicados en el Código
-
-| Método                  | Descripción                                               | Ejemplo en Código                  |
-| :---------------------- | :-------------------------------------------------------- | :--------------------------------- |
-| `length()`              | Cuenta el número total de caracteres (incluye espacios).  | Mide la longitud de `texto`.       |
-| `charAt(index)`         | Devuelve el carácter en la posición indicada (desde `0`). | Obtiene el primer carácter.        |
-| `substring(start, end)` | Extrae un texto desde `start` hasta `end - 1`.            | Corta desde la posición 5 a la 15. |
-| `toLowerCase()`         | Convierte todo el texto a minúsculas.                     | Pasa la cadena a minúsculas.       |
-| `toUpperCase()`         | Convierte todo el texto a MAYÚSCULAS.                     | Pasa la cadena a mayúsculas.       |
-| `indexOf(target)`       | Busca la posición donde inicia una palabra/carácter.      | Busca la palabra `"variable"`.     |
-| `replace(old, new)`     | Reemplaza un texto por otro nuevo.                        | Cambia `"texto"` por `"parrafo"`.  |
-| `contains(target)`      | Verifica si contiene un texto (`true`/`false`).           | Busca si contiene `"asignado"`.    |
-| `trim()`                | Elimina espacios sobrantes al inicio y al final.          | Quita espacios en los bordes.      |
-
-# ☕ Fundamentos de Java & Operadores
-
-Bienvenido a la bitácora de aprendizaje y código del curso **Java desde Cero** por **serg code**. En este espacio se exploran los conceptos fundamentales del lenguaje Java, desde la declaración de variables hasta la implementación de lógica booleana y tablas de la verdad.
+1. [📅 07/09/2026 — Fundamentos, Operadores y Cadenas (String)](#-07092026--fundamentos-operadores-y-cadenas-string)
+   - [Fundamentos y Operadores](#-fundamentos-y-operadores)
+   - [Tabla de la Verdad (Guía de Referencia)](#-tabla-de-la-verdad-guía-de-referencia)
+   - [Manipulación de Cadenas de Texto (`String`)](#-manipulación-de-cadenas-de-texto-string)
+2. [📅 10/09/2026 — Estructuras de Control Condicionales](#-10092026--estructuras-de-control-condicionales)
+   - [Condicionales `if`, `else if`, `else`](#-condicionales-if-else-if-else)
+3. [📅 12/09/2026 — Estructuras de Control Iterativas y Arreglos](#-12092026--estructuras-de-control-iterativas-y-arreglos)
+   - [Bucle `for` y Bucles Anidados (Triple Nivel)](#-bucle-for-y-bucles-anidados-triple-nivel)
+   - [Bucle `while`](#-bucle-while)
+   - [Arreglos (Arrays / Vectores)](#-arreglos-arrays--vectores)
+4. [📅 13/09/2026 — Proyecto Práctico: Juego del Ahorcado (Hangman Game)](#-13092026--proyecto-práctico-juego-del-ahorcado-hangman-game)
+5. [📅 16/09/2026 — Introducción a la Programación Orientada a Objetos (POO)](#-16092026--introducción-a-la-programación-orientada-a-objetos-poo)
+   - [Conceptos Fundamentales de POO](#-conceptos-fundamentales-de-poo)
+   - [Código y Salida en Consola](#-código-implementado-poo-básica)
+6. [📅 17/09/2026 — Relaciones entre Clases: Composición y Asociación](#-17092026--relaciones-entre-clases-composición-y-asociación)
+   - [Relación Tiene-Un (_Has-A_)](#-relación-tiene-un-has-a)
+   - [Diagrama de Clases (Mermaid)](#-representación-visual-en-memoria-heap)
+   - [Mecanismo de Enlace y Prevención de `NullPointerException`](#-análisis-del-mecanismo-de-enlace)
+7. [📅 18/09/2026 — Constructores, Palabra Clave `this` y Encapsulamiento](#-18092026--constructores-palabra-clave-this-y-encapsulamiento)
+   - [Constructores y Sobrecarga](#-constructores-y-sobrecarga-de-constructores)
+   - [Encapsulamiento: Modificador `private`, Getters y Setters](#-encapsulamiento-modificador-private-getters-y-setters)
+8. [📅 18/09/2026 — Herencia, Palabra Clave `super` y Sobrescritura de Métodos (`@Override`)](#-18092026--herencia-palabra-clave-super-y-sobrescritura-de-métodos-override)
+   - [El Concepto de Herencia (Relación Es-Un / Is-A)](#-el-concepto-de-herencia-relación-es-un--is-a)
+   - [Diagrama de Jerarquía de Clases (Mermaid)](#-diagrama-de-jerarquía-de-clases-mermaid)
+   - [La Palabra Clave `super` y Constructores](#-la-palabra-clave-super-y-constructores)
+   - [Sobrescritura de Métodos y Anotación `@Override`](#-sobrescritura-de-métodos-y-anotación-override)
+   - [Código Actual del Proyecto: Herencia](#-código-actual-del-proyecto-herencia)
+9. [🚀 Cómo Ejecutar el Proyecto](#-cómo-ejecutar-el-proyecto)
 
 ---
 
-## 📌 Descripción del Proyecto
+## 📅 07/09/2026 — Fundamentos, Operadores y Cadenas (String)
 
-Este proyecto reúne ejercicios prácticos y explicaciones conceptuales para comprender el funcionamiento interno de Java. Se abarcan temas esenciales como:
+### ☕ Fundamentos y Operadores
 
-- **Sintaxis y Estructura:** Uso de métodos principales (`main`) y manejo de archivos `.java`.
+En esta primera etapa se exploran los pilares esenciales del lenguaje Java:
+
+- **Sintaxis y Estructura:** Definición de clases, método principal (`public static void main(String[] args)`) y ejecución de archivos `.java`.
 - **Operadores Aritméticos:** Operaciones elementales (`+`, `-`, `*`, `/`) y cálculo de residuo o paridad mediante el operador módulo (`%`).
-- **Tipos de Datos:** Manejo de enteros (`int`), decimales (`double`) y tipos booleanos (`boolean`)[cite: 1].
-- **Operadores de Asignación:** Modificación rápida de variables (`+=`, `-=`, `*=`, `/=`, `++`, `--`)[cite: 1].
-- **Operadores de Comparación:** Evaluación relacional (`>`, `<`, `==`) que retornan valores booleanos[cite: 1].
-- **Lógica Booleana:** Compuertas y lógica mediante los operadores `&&`, `||` y `!`[cite: 1].
+- **Tipos de Datos Primitivos y Referenciados:** Enteros (`int`), decimales (`double`), booleanos (`boolean`) y cadenas (`String`).
+- **Operadores de Asignación Compuesta:** Incremento, decremento y reasignación rápida (`+=`, `-=`, `*=`, `/=`, `++`, `--`).
+- **Operadores de Comparación:** Evaluación relacional (`>`, `<`, `>=`, `<=`, `==`, `!=`) que producen valores booleanos.
+- **Lógica Booleana:** Compuertas lógicas mediante los operadores `&&` (AND), `||` (OR) y `!` (NOT).
 
 ---
 
-## 📊 Tabla de la Verdad (Guía de Referencia)
+### 📊 Tabla de la Verdad (Guía de Referencia)
 
-| Operación    | Operador en Java | Condición para ser Verdadero (`true`)                      | Ejemplo                                 |         Resultado         |
-| :----------- | :--------------: | :--------------------------------------------------------- | :-------------------------------------- | :-----------------------: |
-| **AND** (Y)  |       `&&`       | Ambos operandos deben ser `true`                           | `true && true`<br>`true && false`       | **`true`**<br>**`false`** |
-| **OR** (Ó)   |      `\|\|`      | Al menos uno de los operandos debe ser `true`              | `true \|\| false`<br>`false \|\| false` | **`true`**<br>**`false`** |
-| **NOT** (NO) |       `!`        | Invierte el valor actual (de `true` a `false` y viceversa) | `!true`<br>`!false`                     | **`false`**<br>**`true`** |
+| Operación    | Operador en Java | Condición para ser Verdadero (`true`)         | Ejemplo                                 |         Resultado         |
+| :----------- | :--------------: | :-------------------------------------------- | :-------------------------------------- | :-----------------------: |
+| **AND** (Y)  |       `&&`       | Ambos operandos deben ser `true`              | `true && true`<br>`true && false`       | **`true`**<br>**`false`** |
+| **OR** (Ó)   |      `\|\|`      | Al menos uno de los operandos debe ser `true` | `true \|\| false`<br>`false \|\| false` | **`true`**<br>**`false`** |
+| **NOT** (NO) |       `!`        | Invierte el valor booleano actual             | `!true`<br>`!false`                     | **`false`**<br>**`true`** |
 
-## 10/09/2026
+---
 
-## Estructuras de control :
+### 🔤 Manipulación de Cadenas de Texto (`String`)
 
-## Explicación del Código: Estructuras de Control en Java
+Java trata las cadenas como objetos de la clase `java.lang.String`. A continuación se detalla el uso de sus métodos más frecuentes.
 
-Este programa demuestra el uso de **estructuras condicionales relacionales y lógicas** (`if`, `else if`, `else`) para evaluar el acceso de un usuario a un establecimiento según su edad.
-
-### Flujo de Lógica:
-
-- **`edad > 18 && edad <= 60`**: Permite el ingreso regular para personas en el rango de 19 a 60 años.
-- **`edad > 60`**: Restringe el acceso a personas mayores de 60 años.
-- **`edad == 18`**: Permite el acceso exacto a los 18 años con recordatorio de identificación.
-- **`else`**: Deniega el acceso a menores de 18 años.
-
-## 12/09/2026
-
-## Estructuras de Control Iterativas: Bucle For y Bucles Anidados
-
-El bucle `for` permite repetir un bloque de código un número determinado de veces. Su sintaxis básica es:
+#### Cadena de Ejemplo
 
 ```java
-for (inicialización; condición; actualización) {
-    // Código a ejecutar
+String texto = "   Este es un texto asignado a una variable String   ";
+```
+
+#### 🛠️ Métodos Esenciales de la Clase `String`
+
+| Método                  | Descripción                                                                            | Ejemplo de Uso                      |
+| :---------------------- | :------------------------------------------------------------------------------------- | :---------------------------------- |
+| `length()`              | Cuenta el número total de caracteres (incluyendo espacios).                            | `texto.length()`                    |
+| `charAt(index)`         | Retorna el carácter en la posición indicada (índice base `0`).                         | `texto.charAt(3)`                   |
+| `substring(start, end)` | Extrae un fragmento de texto desde `start` hasta `end - 1`.                            | `texto.substring(5, 15)`            |
+| `toLowerCase()`         | Convierte todos los caracteres a minúsculas.                                           | `texto.toLowerCase()`               |
+| `toUpperCase()`         | Convierte todos los caracteres a MAYÚSCULAS.                                           | `texto.toUpperCase()`               |
+| `indexOf(target)`       | Devuelve el índice de la primera coincidencia del término buscado (`-1` si no existe). | `texto.indexOf("variable")`         |
+| `replace(old, new)`     | Reemplaza todas las ocurrencias de una subcadena por una nueva.                        | `texto.replace("texto", "párrafo")` |
+| `contains(target)`      | Verifica si la cadena contiene el texto especificado (`true` / `false`).               | `texto.contains("asignado")`        |
+| `trim()`                | Elimina espacios en blanco sobrantes al principio y al final.                          | `texto.trim()`                      |
+
+---
+
+## 📅 10/09/2026 — Estructuras de Control Condicionales
+
+### 🚦 Condicionales `if`, `else if`, `else`
+
+Las estructuras condicionales permiten bifurcar el flujo de ejecución del programa según el cumplimiento de expresiones booleanas.
+
+#### Ejemplo Práctico: Control de Acceso por Edad
+
+```java
+int edad = 20;
+
+if (edad > 18 && edad <= 60) {
+    System.out.println("Ingreso permitido: usuario en rango regular.");
+} else if (edad > 60) {
+    System.out.println("Acceso preferencial / Restringido para personas mayores de 60 años.");
+} else if (edad == 18) {
+    System.out.println("Ingreso permitido: recién cumplidos 18 años (presentar identificación).");
+} else {
+    System.out.println("Acceso denegado: usuario menor de 18 años.");
 }
 ```
 
-### Bucles Anidados (Triple Nivel)
+#### Flujo de Lógica:
 
-En este ejercicio se implementaron tres bucles `for` anidados (variables `i`, `j` y `k`), donde cada variable itera del 1 al 3:
+- **`edad > 18 && edad <= 60`**: Permite el ingreso regular para personas entre 19 y 60 años.
+- **`edad > 60`**: Atiende la condición especial para adultos mayores.
+- **`edad == 18`**: Evalúa el caso puntual de la mayoría de edad exacta.
+- **`else`**: Cubre todos los casos restantes (menores de 18 años).
+
+---
+
+## 📅 12/09/2026 — Estructuras de Control Iterativas y Arreglos
+
+### 🔄 Bucle `for` y Bucles Anidados (Triple Nivel)
+
+El bucle `for` se utiliza cuando se conoce de antemano el número de iteraciones a ejecutar.
+
+#### Sintaxis Estándar:
 
 ```java
-for (i = 1; i <= 3; i++) {           // Nivel exterior (i)
-    for (j = 1; j <= 3; j++) {       // Nivel intermedio (j)
-        for (k = 1; k <= 3; k++) {   // Nivel interior (k)
+for (inicialización; condición; actualización) {
+    // Bloque de instrucciones a repetir
+}
+```
+
+#### Bucles Anidados (3 Niveles):
+
+```java
+for (int i = 1; i <= 3; i++) {           // Nivel exterior (i)
+    for (int j = 1; j <= 3; j++) {       // Nivel intermedio (j)
+        for (int k = 1; k <= 3; k++) {   // Nivel interior (k)
             System.out.print("i:");
             System.out.print(i);
             System.out.print(" j:");
@@ -110,84 +160,54 @@ for (i = 1; i <= 3; i++) {           // Nivel exterior (i)
 }
 ```
 
-### Flujo de Ejecución:
+#### 🧠 Flujo de Ejecución:
 
-- **De adentro hacia afuera:** Por cada incremento del bucle exterior (`i`), el bucle intermedio (`j`) avanza un paso, y el interior (`k`) se ejecuta por completo de 1 a 3.
-- **Total de iteraciones:** Al tener 3 niveles de 3 repeticiones cada uno, se generan $3 \times 3 \times 3 = \mathbf{27}$ combinaciones en total (desde `i:1 j:1 k:1` hasta `i:3 j:3 k:3`).
-
-### Manejo de Salida en Consola:
-
-- **`System.out.print()`:** Imprime texto o variables sin salto de línea, permitiendo armar los datos de `i`, `j` y `k` en la misma fila.
-- **`System.out.println()`:** Imprime el valor final de `k` e introduce un salto de línea, preparando la consola para la siguiente iteración.
+- **Ejecución de adentro hacia afuera:** Por cada paso del ciclo exterior (`i`), el ciclo intermedio (`j`) avanza un valor, y el interior (`k`) recorre completamente sus iteraciones del 1 al 3.
+- **Total de iteraciones:** $3 \times 3 \times 3 = \mathbf{27}$ combinaciones generadas (`i:1 j:1 k:1` ... `i:3 j:3 k:3`).
+- **Diferencia entre `print` y `println`:**
+  - `System.out.print()`: Imprime texto sin salto de línea, permitiendo construir salidas continuas en la misma fila.
+  - `System.out.println()`: Imprime el valor e introduce un retorno de carro / salto de línea al final.
 
 ---
 
-## Estructuras de Control Iterativas: Bucle While
+### 🔁 Bucle `while`
 
-El bucle `while` ejecuta un bloque de instrucciones de manera repetitiva **mientras una condición booleana sea verdadera (`true`)**. La condición se evalúa antes de cada iteración.
-
-### Sintaxis Básica
-
-```java
-while (condición) {
-    // Código a ejecutar mientras la condición sea verdadera
-    // Actualización de la variable de control
-}
-```
-
-### Código Implementado
+El bucle `while` ejecuta un bloque de código **mientras una condición booleana permanezca como `true`**. La evaluación se realiza antes de cada ciclo.
 
 ```java
 public class App {
     public static void main(String[] args) throws Exception {
-        // Estructuras de control iterativas: while
         int contador = 1;
 
         while (contador <= 5) {
             System.out.println(contador);
-            // Actualización de la variable para evitar un bucle infinito
-            contador++;
+            contador++; // Actualización de variable para evitar bucles infinitos
         }
-        System.err.println(contador);
+        System.err.println("Valor final fuera del bucle: " + contador);
     }
 }
 ```
 
-### 🧠 Flujo de Ejecución:
+#### 📌 Puntos Clave:
 
-1. **Inicialización (`int contador = 1;`):** Se define la variable de control antes de entrar al bucle.
-2. **Evaluación de la condición (`contador <= 5`):**
-   - **Vuelta 1:** `contador = 1` $\rightarrow$ Imprime `1`, incrementa a `2`.
-   - **Vuelta 2:** `contador = 2` $\rightarrow$ Imprime `2`, incrementa a `3`.
-   - **Vuelta 3:** `contador = 3` $\rightarrow$ Imprime `3`, incrementa a `4`.
-   - **Vuelta 4:** `contador = 4` $\rightarrow$ Imprime `4`, incrementa a `5`.
-   - **Vuelta 5:** `contador = 5` $\rightarrow$ Imprime `5`, incrementa a `6`.
-3. **Condición de Parada:** Al volver a evaluar, `6 <= 5` es `false`, por lo que el ciclo termina.
-4. **Valor Final Fuera del Bucle:** Al salir del `while`, la variable `contador` conserva el valor `6`.
-
-### 📌 Puntos Clave:
-
-- **Prevención de Bucle Infinito:** Es fundamental la actualización `contador++`. Si se omite, la condición siempre evaluará a `true` y el programa nunca terminará.
-- **Diferencia entre `System.out` y `System.err`:**
-  - **`System.out.println()`**: Envía datos al canal de salida estándar (texto normal).
-  - **`System.err.println()`**: Envía datos al canal de salida de error estándar (usualmente resaltado en color rojo en terminales/IDEs o usado para depuración y avisos).
+- **Prevención de bucles infinitos:** Se debe garantizar que la variable de control se modifique en cada iteración (`contador++`).
+- **Canales de Salida:**
+  - `System.out.println()`: Envía texto al canal estándar (`stdout`).
+  - `System.err.println()`: Envía información al canal de error (`stderr`), usualmente resaltado para depuración y advertencias.
 
 ---
 
-## Arreglos (Arrays / Vectores)
+### 📦 Arreglos (Arrays / Vectores)
 
-Los **arreglos** son estructuras de datos que almacenan un conjunto de valores del mismo tipo de forma secuencial. Cada elemento dentro del arreglo es accesible mediante una posición numérica denominada **índice**.
+Un **arreglo** es una estructura de datos indexada que almacena una colección de elementos secuenciales del **mismo tipo** en memoria.
 
-### 📌 Características Principales:
+#### Características Principales:
 
-- **Índice base cero (`0`):** El primer elemento se posiciona en el índice `0` y el último en `longitud - 1`.
-- **Tipo de dato homogéneo:** Todos los elementos deben pertenecer al mismo tipo (`int[]`, `char[]`, `String[]`, etc.).
-- **Acceso y modificación directa:** Se accede o reasigna un valor usando la sintaxis `arreglo[indice]`.
-- **Propiedad `.length`:** Atributo que devuelve el tamaño total de elementos del arreglo.
+- **Índice base cero (`0`):** El primer elemento se ubica en el índice `0`, y el último en `longitud - 1`.
+- **Tamaño Fijo:** Su dimensión se define al instanciarse y no puede alterarse en tiempo de ejecución.
+- **Propiedad `.length`:** Atributo directo que devuelve la cantidad de posiciones del arreglo.
 
----
-
-### 💻 Declaración, Inicialización y Modificación
+#### Declaración, Inicialización y Modificación:
 
 ```java
 // 1. Declaración asignando tamaño en memoria:
@@ -196,60 +216,41 @@ int[] numeros = new int[5];
 // 2. Inicialización directa con valores:
 int[] numeros = { 10, 20, 30, 40, 50 };
 
-// Modificación de un elemento por su índice:
+// 3. Modificación directa por índice:
 numeros[2] = 70; // El elemento en el índice 2 pasa de 30 a 70
 ```
 
----
-
-### 🔄 Formas de Recorrer un Arreglo
-
-#### 1. Bucle `for-each` (Bucle Mejorado)
-
-Recorre cada elemento secuencialmente sin necesidad de gestionar manualmente la condición de parada o el índice:
+#### Formas de Recorrer un Arreglo:
 
 ```java
-int indice = 0;
+// Opción A: Bucle for-each (Mejorado)
 for (int numero : numeros) {
-    System.out.println(numero); // Imprime el valor
-    System.out.println(indice); // Imprime el índice de referencia
-    indice++;
+    System.out.println(numero);
 }
-```
 
-#### 2. Bucle `for` Clásico usando `.length`
-
-Permite tener control total sobre el índice durante la iteración:
-
-```java
+// Opción B: Bucle for clásico usando .length
 for (int index = 0; index < numeros.length; index++) {
-    System.out.println(numeros[index]); // Acceso al valor en el índice actual
-    System.out.println(index);          // Índice actual (0 a 4)
+    System.out.println("Índice " + index + ": " + numeros[index]);
 }
 ```
 
+> [!TIP]
+> **Diferencia Clave:**
+>
+> - `arreglo.length`: Es una **propiedad/campo** de los arrays en Java (sin paréntesis).
+> - `cadena.length()`: Es un **método** de la clase `String` (con paréntesis).
+
 ---
 
-### 💡 Nota: `.length` (Arreglos) vs `.length()` (Strings)
+## 📅 13/09/2026 — Proyecto Práctico: Juego del Ahorcado (Hangman Game)
 
-- **`arreglo.length`**: Es un **atributo/propiedad** de los arreglos (sin paréntesis) que contiene el tamaño del array.
-- **`string.length()`**: Es un **método** de la clase `String` (con paréntesis) que calcula el conteo de caracteres (ej. `"Abecedario".length()` retorna `10`).
-
----
-
-## 13/09/2026
-
-## 🎮 Proyecto Práctico: Juego del Ahorcado (Hangman Game)
-
-En este ejercicio práctico se integran los conceptos fundamentales aprendidos hasta el momento: **Manejo de Cadenas (`String`)**, **Arreglos (`char[]`)**, **Estructuras de Control Condicionales (`if/else`)** e **Iterativas (`while`, `for`)**, y **Entrada de Datos por Consola (`Scanner`)**.
+En este proyecto se integran todos los conocimientos adquiridos hasta el momento: manejo de `String`, arreglos de caracteres `char[]`, ciclos `for` y `while`, condicionales y captura de datos por consola con `Scanner`.
 
 ### 🎯 Objetivo del Juego
 
-Adivinar una palabra secreta carácter por carácter antes de que se agoten los intentos permitidos (en este caso, 10 intentos).
+Adivinar una palabra secreta carácter por carácter antes de agotar los 10 intentos disponibles.
 
----
-
-### 💻 Código Implementado (`Ahorcado.java`)
+### 💻 Código Fuente (`Ahorcado.java`)
 
 ```java
 import java.util.Scanner;
@@ -257,60 +258,55 @@ import java.util.Scanner;
 public class Ahorcado {
 
   public static void main(String[] args) throws Exception {
-    // Clase Scanner que nos permite que el usuario escriba
     Scanner scanner = new Scanner(System.in);
 
-    // Declaraciones y asignaciones de variables
+    // Configuración y variables de estado del juego
     String PalabraSecreta = "inteligencia";
     int IntentosMaximos = 10;
     int Intentos = 0;
     boolean PalabraAdivinada = false;
 
-    // Arreglos: progreso de las letras adivinadas
+    // Arreglo para representar las letras descubiertas
     char[] LetrasAdivinadas = new char[PalabraSecreta.length()];
 
-    // Estructura de control: Iterativa (Bucle for) para inicializar con guiones '_'
+    // Inicialización del tablero con guiones bajos '_'
     for (int i = 0; i < LetrasAdivinadas.length; i++) {
       LetrasAdivinadas[i] = '_';
     }
 
-    // Estructura de control: Iterativa (While)
-    // Se ejecuta mientras la palabra no haya sido adivinada y queden intentos disponibles
+    // Bucle principal de juego
     while (!PalabraAdivinada && Intentos < IntentosMaximos) {
       System.out.println(
-          "Palabra a adivinar : " + String.valueOf(LetrasAdivinadas) + " (" + PalabraSecreta.length() + " letras)");
-      System.out.println("Introduce una letra, por favor");
+          "Palabra a adivinar: " + String.valueOf(LetrasAdivinadas) + " (" + PalabraSecreta.length() + " letras)");
+      System.out.println("Introduce una letra, por favor:");
 
-      // Capturamos el primer carácter introducido y lo convertimos a minúscula
       char letra = Character.toLowerCase(scanner.next().charAt(0));
-
       boolean LetraCorrecta = false;
 
-      // Estructura de control: Iterativa (Bucle for) para buscar coincidencias
+      // Verificación de coincidencias
       for (int i = 0; i < PalabraSecreta.length(); i++) {
-        // Estructura de control Condicional: si la letra coincide, actualizamos el arreglo
         if (PalabraSecreta.charAt(i) == letra) {
           LetrasAdivinadas[i] = letra;
           LetraCorrecta = true;
         }
       }
 
-      // Si la letra no fue acertada, se penaliza sumando un intento
+      // Penalización por intento fallido
       if (!LetraCorrecta) {
         Intentos++;
-        System.out.println("¡Incorrecto!  Te quedan " + (IntentosMaximos - Intentos) + " Intentos");
+        System.out.println("¡Incorrecto! Te quedan " + (IntentosMaximos - Intentos) + " intentos.");
       }
 
-      // Comprobamos si el arreglo actual coincide completamente con la palabra secreta
+      // Comprobación de victoria
       if (String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)) {
         PalabraAdivinada = true;
         System.out.println("¡Felicidades! Has adivinado la palabra: " + PalabraSecreta);
       }
     }
 
-    // Mensaje de fin de juego si agotó los intentos sin adivinar
+    // Mensaje de derrota
     if (!PalabraAdivinada) {
-      System.out.println("¡Has perdido! Te quedaste sin intentos.");
+      System.out.println("¡Has perdido! Se agotaron los intentos.");
     }
 
     scanner.close();
@@ -318,73 +314,45 @@ public class Ahorcado {
 }
 ```
 
----
-
 ### 🧠 Conceptos Clave Aplicados
 
-| Componente / Método                                       | ¿Para qué se utiliza en este ejercicio?                                                   |
-| :-------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
-| `new char[PalabraSecreta.length()]`                       | Crea un arreglo de caracteres con la misma longitud que la palabra secreta.               |
-| `Character.toLowerCase(...)`                              | Normaliza el carácter recibido para que el juego sea insensible a mayúsculas/minúsculas.  |
-| `scanner.next().charAt(0)`                                | Lee el texto ingresado por el usuario y extrae únicamente la primera letra (índice `0`).  |
-| `PalabraSecreta.charAt(i)`                                | Compara cada letra de la palabra secreta con la letra ingresada en el bucle.              |
-| `String.valueOf(LetrasAdivinadas)`                        | Convierte el arreglo `char[]` a un `String` para imprimirlo o compararlo con `.equals()`. |
-| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Control del ciclo principal mediante compuertas lógicas (`!`, `&&`, `<`).                 |
-| `if (!LetraCorrecta)`                                     | Bandera de estado booleana para descontar intentos únicamente tras fallar.                |
+| Componente / Sintaxis                                     | Utilidad Práctica en el Juego                                               |
+| :-------------------------------------------------------- | :-------------------------------------------------------------------------- |
+| `new char[PalabraSecreta.length()]`                       | Crea un arreglo de caracteres proporcional a la palabra secreta.            |
+| `Character.toLowerCase(...)`                              | Normaliza la letra introducida para evitar discrepancias por mayúsculas.    |
+| `scanner.next().charAt(0)`                                | Lee la entrada de consola y extrae el primer carácter ingresado.            |
+| `String.valueOf(LetrasAdivinadas)`                        | Convierte el array `char[]` a un `String` para visualización y comparación. |
+| `while (!PalabraAdivinada && Intentos < IntentosMaximos)` | Controla la continuidad de la partida mediante operadores lógicos.          |
 
 ---
 
-### 🔄 Flujo de Ejecución del Programa
+## 📅 16/09/2026 — Introducción a la Programación Orientada a Objetos (POO)
 
-1. **Ciclo de Turnos (`while`):**
-   - Muestra el estado del tablero con las letras descubiertas hasta el momento.
-   - Pide al usuario ingresar una letra y la procesa en minúscula.
-   - Recorre la palabra secreta: si la letra existe, reemplaza los guiones en sus posiciones correspondientes y marca `LetraCorrecta = true`.
-   - Si no acertó (`!LetraCorrecta`), descuenta un intento y notifica al usuario.
-   - Comprueba si todas las letras fueron adivinadas con `String.valueOf(LetrasAdivinadas).equals(PalabraSecreta)`.
-2. **Condición de Salida:** Si adivina la palabra, felicita al jugador. Si los intentos llegan al límite (`10`), muestra el mensaje de derrota y cierra el objeto `Scanner`.
+Transición de la programación procedimental hacia la **Programación Orientada a Objetos (POO)**. Este paradigma permite estructurar el software modelando entidades del mundo real mediante clases y objetos.
 
----
+### 🎯 Conceptos Fundamentales de POO
 
-## 16/09/2026
-
-## 🧱 Introducción a la Programación Orientada a Objetos (POO)
-
-En esta sesión se da el salto fundamental de la programación estructurada/procedimental hacia la **Programación Orientada a Objetos (POO)**. Este paradigma permite estructurar el código modelando elementos y conceptos del mundo real mediante **clases** (plantillas o moldes) y **objetos** (instancias creadas a partir de dichas plantillas).
+1. **Clase (`class`):** Molde o plantilla conceptual que define atributos y comportamientos.
+2. **Objeto / Instancia:** Elemento concreto creado en memoria Heap mediante `new`.
+3. **Atributos:** Variables pertenecientes a la clase que almacenan el estado del objeto.
+4. **Métodos:** Funciones asociadas que dictan el comportamiento y las acciones del objeto.
 
 ---
 
-### 🎯 Conceptos Fundamentales
+### 💻 Código Implementado (POO Básica)
 
-1. **Clase (`class`):** Es el molde, plano o plantilla conceptual. Define qué características (atributos) y qué acciones (métodos) tendrán los elementos que se fabriquen a partir de ella.
-2. **Objeto / Instancia:** Es el elemento real y concreto que se crea en memoria a partir de una clase mediante la palabra reservada `new`. Cada objeto tiene su propio espacio de memoria e identidad.
-3. **Atributos (Estado / Características):** Son las variables declaradas dentro de la clase. Almacenan los datos que describen el estado particular de cada objeto.
-4. **Métodos (Comportamiento / Acciones):** Son bloques de código (funciones) asociadas al objeto que definen lo que este puede hacer o cómo responde ante ciertas solicitudes.
-
----
-
-### 💻 Código Implementado
-
-El ejercicio se divide en dos archivos para mantener la separación de responsabilidades:
-
-#### 1. Definición del Molde: `Persona.java`
+#### 1. Definición de la Clase: `Persona.java`
 
 ```java
 public class Persona {
-  // Atributos y características de un objeto (Estado)
   String Nombre;
   String Apellido;
   int Edad;
 
-  // Métodos: Son los comportamientos de un objeto (Acciones)
-
-  // Método sin parámetros: procesa y concatena atributos del propio objeto
   public String darNombreCompleto() {
     return Apellido + ", " + Nombre;
   }
 
-  // Método con parámetros y lógica condicional:
-  // Evalúa la edad del objeto para determinar el tipo de saludo
   public String enviarSaludo(String saludado) {
     if (Edad > 40) return "Buenos dias, querido " + saludado;
     return "Hola, ¿como estas " + saludado + "?";
@@ -392,93 +360,56 @@ public class Persona {
 }
 ```
 
-#### 2. Creación y Uso de Instancias: `App.java`
+#### 2. Instanciación y Uso: `App.java`
 
 ```java
 public class App {
-        public static void main(String[] args) throws Exception {
-                Persona persona1 = new Persona();
-                persona1.Nombre = "Leonardo";
-                persona1.Apellido = "Dicaprio";
-                persona1.Edad = 25;
-                // Creación del segundo objeto independiente (persona2)
-                Persona persona2 = new Persona();
-                persona2.Nombre = "Mariana";
-                persona2.Apellido = "Alvarez";
-                persona2.Edad = 46;
+    public static void main(String[] args) throws Exception {
+        Persona persona1 = new Persona();
+        persona1.Nombre = "Leonardo";
+        persona1.Apellido = "Dicaprio";
+        persona1.Edad = 25;
 
-                String saludado = " Desarollador Urrego";
-                // Invocación del método darNombreCompleto() y lectura de atributos
+        Persona persona2 = new Persona();
+        persona2.Nombre = "Mariana";
+        persona2.Apellido = "Alvarez";
+        persona2.Edad = 46;
 
-                // persona 1
-                System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad + " años.");
-                // persona 2
-                System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad + " años.");
+        String saludado = " Desarrollador Urrego";
 
-                System.out.println(persona1.enviarSaludo(saludado));
-                System.out.println(persona2.enviarSaludo(" Desarollador"));
-        }
+        System.out.println(persona1.darNombreCompleto() + ", tiene " + persona1.Edad + " años.");
+        System.out.println(persona2.darNombreCompleto() + ", tiene " + persona2.Edad + " años.");
 
+        System.out.println(persona1.enviarSaludo(saludado));
+        System.out.println(persona2.enviarSaludo(" Desarrollador"));
+    }
 }
 ```
-
----
-
-### 🧠 Conceptos Clave Aplicados
-
-| Concepto / Sintaxis                           | ¿Para qué se utiliza en este ejercicio?                                                                                                                             |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Persona persona1 = new Persona();`           | **Instanciación:** Crea un objeto nuevo en memoria a partir de la clase `Persona`.                                                                                  |
-| `persona1.Nombre = "Sebastian";`              | **Operador punto (`.`):** Permite acceder y asignar valores a los atributos públicos de cada objeto.                                                                |
-| `public String darNombreCompleto()`           | **Método con retorno (`return`):** Devuelve una cadena con formato `"Apellido, Nombre"` leyendo los atributos internos de la instancia.                             |
-| `public String enviarSaludo(String saludado)` | **Paso de parámetros y lógica interna:** Recibe un valor exterior (`saludado`) y lo combina con el estado interno (`Edad > 40`) para decidir la respuesta adecuada. |
-| **Independencia de Instancias**               | Aunque `persona1` y `persona2` provienen de la misma clase, sus datos en memoria son totalmente aislados e independientes.                                          |
-
----
-
-### 🔄 Flujo de Ejecución y Salida en Consola
-
-1. **Instanciación:** Se reservan dos espacios de memoria distintos para `persona1` y `persona2`.
-2. **Asignación de Estado:** Se asignan los nombres, apellidos y edades correspondientes a cada sujeto.
-3. **Formateo de Nombre:** Ambos objetos invocan su método `darNombreCompleto()`, imprimiendo el formato estándar configurado en la clase.
-4. **Evaluación Condicional según Estado:**
-   - Para `persona1` (Edad 25): la condición `25 > 40` resulta `false`, produciendo un saludo casual.
-   - Para `persona2` (Edad 46): la condición `46 > 40` resulta `true`, produciendo un saludo formal y respetuoso.
 
 #### 🖥️ Salida en Consola:
 
 ```text
 Dicaprio, Leonardo, tiene 25 años.
 Alvarez, Mariana, tiene 46 años.
-Hola, ¿como estas Desarollador Urrego?
-Buenos dias,querido Desarollador
+Hola, ¿como estas  Desarrollador Urrego?
+Buenos dias, querido  Desarrollador
 ```
 
 ---
 
-## 17/09/2026
+## 📅 17/09/2026 — Relaciones entre Clases: Composición y Asociación
 
-## 🔗 Relaciones entre Clases: Atributos de Tipo Objeto (Composición y Asociación)
+En esta sesión se aborda la colaboración entre clases. Una clase puede tener como atributo **una referencia hacia una instancia de otra clase**, dando lugar a la relación **Tiene-Un (_Has-A_)**.
 
-En esta sesión se da un salto fundamental en el diseño de software orientado a objetos: **hacer que dos o más clases colaboren entre sí**. En lugar de almacenar únicamente tipos de datos simples (`int`, `boolean`, `String`), una clase puede tener como atributo **una instancia de otra clase**.
+### 💡 Ventajas de Separar en Múltiples Clases
 
-A este principio en POO se le conoce como la relación **"Tiene-Un" (*Has-A*)**.
-
----
-
-### 💡 ¿Por qué no poner los atributos directamente en `Persona`?
-
-Podríamos haber agregado en `Persona.java` variables como `String nombreCarrera;` o `int duracionCarrera;`. Sin embargo, separar los conceptos en clases independientes aporta grandes ventajas:
-
-1. **Modularidad y Responsabilidad Única:** La clase `Persona` se encarga únicamente de los datos humanos (nombre, apellido, edad), mientras que `Carrera` se responsabiliza de la información académica.
-2. **Reutilización:** La misma clase `Carrera` puede reutilizarse en el futuro para universidades, facultades o registros de inscripción sin duplicar código.
-3. **Escalabilidad:** Si en el futuro una carrera necesita más datos (como materias, créditos o promedio de aprobación), solo se modifica `Carrera.java` sin alterar el molde de `Persona`.
+1. **Responsabilidad Única:** `Persona` gestiona información personal; `Carrera` administra información académica.
+2. **Reutilización:** `Carrera` puede reutilizarse en universidades, facultades o matrículas.
+3. **Escalabilidad:** Agregar materias o notas a `Carrera` no altera el código de `Persona`.
 
 ---
 
 ### 🗺️ Representación Visual en Memoria (Heap)
-
-Cuando creamos los objetos y los vinculamos en Java, ocurre lo siguiente en la memoria:
 
 ```mermaid
 classDiagram
@@ -500,274 +431,400 @@ classDiagram
     Persona "1" o-- "1" Carrera : tiene una (Asociación)
 ```
 
-En memoria, `persona1.carrera` no almacena físicamente una copia de la carrera, sino un **puntero o referencia** que apunta directamente a la dirección de memoria donde se encuentra `carrera1`.
-
 ---
 
-### 💻 Código Implementado y Análisis Paso a Paso
+### 💻 Código Implementado
 
-El avance involucra tres archivos dentro de `src/`:
-
-#### 1. Definición del Objeto Componente: `Carrera.java`
+#### 1. Clase Componente: `Carrera.java`
 
 ```java
 public class Carrera {
-  String nombre;       // Denominación oficial de la carrera universitaria
-  int duracion;        // Tiempo estimado de la carrera expresado en años
-  boolean estaEnCurso; // Estado actual: true (estudiando) | false (egresado/graduado)
+  String nombre;       // Nombre de la carrera
+  int duracion;        // Duración estimada en años
+  boolean estaEnCurso; // true = cursando, false = graduado
 }
 ```
 
-- **Propósito:** Actúa como plantilla para representar cualquier titulación académica de forma aislada.
-
-#### 2. Definición del Objeto Contenedor: `Persona.java`
+#### 2. Clase Contenedora: `Persona.java`
 
 ```java
 public class Persona {
-  // Atributos y características de un objeto
   String Nombre;
   String Apellido;
   int Edad;
-  
-  // Atributo de tipo objeto: Relación Has-A ("Una persona TIENE UNA carrera")
-  Carrera carrera;
+  Carrera carrera; // Atributo de tipo objeto (Relación Has-A)
 
-  // Métodos: Comportamientos del objeto
   public String darNombreCompleto() {
     return Apellido + ", " + Nombre;
   }
 
   public String enviarSaludo(String saludado) {
     if (Edad > 40)
-      return "Buenos dias,querido" + saludado;
-    return "Hola, ¿como estas" + saludado + "?";
+      return "Buenos dias, querido " + saludado;
+    return "Hola, ¿como estas " + saludado + "?";
   }
 }
 ```
 
-> [!NOTE]
-> Al declarar `Carrera carrera;`, el valor por defecto de este atributo antes de asignarle un objeto es **`null`** (no apunta a ninguna dirección de memoria).
-
-#### 3. Instanciación, Enlace e Impresión: `App.java`
+#### 3. Vinculación y Uso: `App.java`
 
 ```java
 public class App {
     public static void main(String[] args) throws Exception {
-        // ==========================================
-        // CASO 1: Leonardo DiCaprio (Graduado)
-        // ==========================================
         Persona persona1 = new Persona();
         persona1.Nombre = "Leonardo";
         persona1.Apellido = "Dicaprio";
         persona1.Edad = 25;
 
-        // Se crea el objeto Carrera de forma independiente
         Carrera carrera1 = new Carrera();
         carrera1.nombre = "Ingenieria en computacion";
         carrera1.duracion = 6;
-        carrera1.estaEnCurso = false; // Ya no cursa, está recibido
+        carrera1.estaEnCurso = false;
 
-        // VINCULACIÓN: Se enlaza carrera1 a persona1
-        persona1.carrera = carrera1;
+        persona1.carrera = carrera1; // VINCULACIÓN POR REFERENCIA
 
-        // ==========================================
-        // CASO 2: Mariana Álvarez (Cursando actualmente)
-        // ==========================================
-        Persona persona2 = new Persona();
-        persona2.Nombre = "Mariana";
-        persona2.Apellido = "Alvarez";
-        persona2.Edad = 46;
-
-        // Se crea la segunda Carrera independiente
-        Carrera carrera2 = new Carrera();
-        carrera2.nombre = "Ingenieria en sistemas";
-        carrera2.duracion = 6;
-        carrera2.estaEnCurso = true; // Sigue estudiando
-
-        // VINCULACIÓN: Se enlaza carrera2 a persona2
-        persona2.carrera = carrera2;
-
-        String saludado = " Desarollador Urrego";
-
-        // ==========================================
-        // LECTURA CON ACCESO ENCADENADO
-        // ==========================================
-        // Para persona 1:
-        System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad 
+        System.out.println(persona1.darNombreCompleto() + ", tiene " + persona1.Edad
             + " años y esta recibido de " + persona1.carrera.nombre);
-        
-        // Para persona 2:
-        System.out.println(persona2.darNombreCompleto() + ", " + "tiene " + persona2.Edad
-            + " años y eta cursando " + persona2.carrera.nombre);
-
-        // System.out.println(persona1.enviarSaludo(saludado));
-        // System.out.println(persona2.enviarSaludo(" Desarollador"));
     }
 }
 ```
 
 ---
 
-### 🔍 Análisis Detallado del Mecanismo de Enlace
+### 🔍 Análisis del Mecanismo de Enlace
 
-#### ¿Cómo funciona el Acceso Encadenado (`persona1.carrera.nombre`)?
-1. `persona1`: Se accede a la instancia de la persona.
-2. `.carrera`: Se sigue la referencia interna hacia el objeto `Carrera` vinculado (`carrera1`).
-3. `.nombre`: Se obtiene el valor del atributo `nombre` contenido dentro de ese objeto de carrera (`"Ingenieria en computacion"`).
+#### Acceso Encadenado (`persona1.carrera.nombre`):
+
+1. `persona1`: Se consulta la referencia del objeto persona.
+2. `.carrera`: Se navega hacia el objeto `Carrera` asociado.
+3. `.nombre`: Se obtiene el valor del atributo `nombre` contenido dentro de `Carrera`.
 
 > [!WARNING]
-> **El Error Común: `NullPointerException` (NPE)**
-> Si intentas ejecutar `System.out.println(persona1.carrera.nombre);` **antes** de la línea `persona1.carrera = carrera1;`, el programa lanzará un error en tiempo de ejecución (`java.lang.NullPointerException`). Esto ocurre porque `carrera` aún valdría `null`, y Java no puede buscar un atributo `.nombre` en un objeto inexistente en memoria.
+> **Prevención de `NullPointerException` (NPE):**
+> Si se intenta acceder a `persona1.carrera.nombre` antes de asignar `persona1.carrera = carrera1;`, Java lanzará un `java.lang.NullPointerException` porque la referencia interna de `carrera` apunta a `null`.
 
 ---
 
-### 🧠 Tabla de Conceptos Clave Aplicados
+## 📅 18/09/2026 — Constructores, Palabra Clave `this` y Encapsulamiento
 
-| Sintaxis / Concepto | Significado Técnico | Utilidad Práctica |
-| :--- | :--- | :--- |
-| `Carrera carrera;` | Atributo por referencia | Permite que una clase guarde la dirección de memoria de otro objeto. |
-| `new Carrera();` | Instanciación | Reserva espacio en memoria Heap para alojar los datos de una nueva carrera. |
-| `persona1.carrera = carrera1;` | Enlace / Asociación | Conecta ambas entidades asignando la referencia del objeto `carrera1` a la propiedad interna de `persona1`. |
-| `persona1.carrera.nombre` | Operador punto encadenado | Permite navegar niveles de objetos anidados para leer o modificar datos profundos. |
-| `carrera.estaEnCurso` | Bandera de estado (`boolean`) | Determina la lógica de negocio (si la persona ya es graduada o sigue siendo estudiante). |
+Esta jornada profundiza en la inicialización robusta de objetos y en el principio de **Encapsulamiento**, protegiendo el estado interno de las clases mediante modificadores de acceso, constructores y métodos accesores/mutadores.
 
 ---
 
-### 🖥️ Salida en Consola y Validación
+### 🏗️ Constructores y Sobrecarga de Constructores
 
-Al compilar y ejecutar `App.java`, la salida final verificada es:
+Un **constructor** es un método especial que se invoca automáticamente al instanciar un objeto con `new`.
 
-```text
-Dicaprio, Leonardo, tiene 25 años y esta recibido de Ingenieria en computacion
-Alvarez, Mariana, tiene 46 años y eta cursando Ingenieria en sistemas
-```
+#### Reglas de los Constructores:
 
----
+- Debe tener el **mismo nombre exacto** de la clase.
+- **No posee tipo de retorno** (ni siquiera `void`).
+- Se utiliza para inicializar atributos y garantizar un estado consistente desde el nacimiento del objeto.
 
-## 18/09/2026
+#### La Palabra Clave `this`:
 
-## 🏗️ Constructores, la Palabra Clave `this` y Sobrecarga de Constructores
+- Resuelve la ambigüedad (_shadowing_) cuando el parámetro tiene el mismo nombre que el atributo de la clase:
+  ```java
+  this.nombre = nombre;
+  ```
 
-En esta sesión se optimiza la creación de objetos en Java mediante el uso de **Constructores**. Anteriormente, los atributos se asignaban manualmente uno por uno después de crear la instancia (`persona1.Nombre = ...;`). Con los constructores, el objeto nace completamente inicializado y en un estado coherente desde el primer momento.
+#### Sobrecarga de Constructores (_Overloading_):
 
----
-
-### 🎯 Conceptos Fundamentales
-
-1. **¿Qué es un Constructor?**
-   - Es un bloque de código especial que se ejecuta automáticamente al instanciar un objeto con el operador `new`.
-   - **Reglas obligatorias:**
-     - Lleva **exactamente el mismo nombre** de la clase (respetando mayúsculas y minúsculas).
-     - **No define ningún tipo de retorno** (ni siquiera `void`).
-   - **Propósito:** Inicializar atributos, reservar recursos y garantizar que el objeto no quede con datos nulos o inconsistentes.
-
-2. **La Palabra Clave `this`:**
-   - Es una referencia que apunta al **objeto actual** que está ejecutando el código.
-   - **Resolución de Ambigüedad (*Shadowing*):** Si el parámetro recibido en el constructor tiene el mismo nombre que el atributo de la clase, se utiliza `this.atributo = parametro;` para diferenciar la variable de instancia del parámetro local.
-
-3. **Sobrecarga de Constructores (*Constructor Overloading*):**
-   - Java permite definir más de un constructor en la misma clase, siempre y cuando tengan **diferente número o tipo de parámetros** (diferente firma).
-   - Esto otorga flexibilidad: se puede instanciar un objeto con todos sus datos completos o solo con los datos básicos indispensables.
-
----
-
-### 💻 Código Implementado
-
-#### 1. Constructores en `Carrera.java`
+Permite definir múltiples constructores con distinta lista de argumentos (distinta firma).
 
 ```java
-public class Carrera {
-  String nombre;
-  int duracion;
-  boolean estaEnCurso;
-
-  // Constructor Completo: inicializa todos los atributos
-  public Carrera(String nombre, int duracion, boolean estaEnCurso) {
+// Constructor Completo
+public Carrera(String nombre, int duracion, boolean estaEnCurso) {
     this.nombre = nombre;
     this.duracion = duracion;
     this.estaEnCurso = estaEnCurso;
-  }
+}
 
-  // Constructor Sobrecargado: solo requiere el nombre de la carrera
-  public Carrera(String nombre) {
+// Constructor Sobrecargado (solo requiere el nombre)
+public Carrera(String nombre) {
     this.nombre = nombre;
-  }
 }
 ```
 
-#### 2. Constructores y Composición en `Persona.java`
+---
+
+### 🔒 Encapsulamiento: Modificador `private`, Getters y Setters
+
+El **Encapsulamiento** es uno de los 4 pilares fundamentales de la POO. Consiste en **ocultar los atributos internos** de una clase para evitar modificaciones indebidas desde el exterior y exponer únicamente métodos de control.
+
+```
+       [ Mundo Exterior / App.java ]
+                     │
+           ┌─────────┴─────────┐
+           ▼                   ▼
+    getNombre()             setNombre("...")
+  (Lectura controlada)    (Escritura validada)
+           └─────────┬─────────┘
+                     ▼
+        [ Atributos Privados ]
+        private String Nombre;
+```
+
+#### ¿Por qué usar `private`?
+
+- **Seguridad:** Los atributos no pueden ser alterados directamente con `persona.Nombre = "..."`.
+- **Control y Transformación:** Se pueden aplicar formatos, conversiones (ej. `.toUpperCase()`) o validaciones antes de retornar o actualizar un dato.
+
+---
+
+### 💻 Código Actual del Proyecto
+
+#### 1. Definición con Encapsulamiento: `src/Persona.java`
 
 ```java
 public class Persona {
-  // Atributos
-  String Nombre;
-  String Apellido;
-  int Edad;
-  Carrera carrera;
+  // Atributos privados (Ocultamiento de estado)
+  private String Nombre;
+  private String Apellido;
+  private int Edad;
 
-  // Constructor 1 (Completo): recibe los datos de la persona y de la carrera
-  public Persona(String nombre, String apellido, int edad, String nombreCarrera, int duracionCarrera,
-      boolean estaEnCurso) {
-    // Instancia internamente la Carrera llamando a su constructor
-    carrera = new Carrera(nombreCarrera, duracionCarrera, estaEnCurso);
+  // Constructor
+  public Persona(String nombre, String apellido, int edad) {
     this.Nombre = nombre;
     this.Apellido = apellido;
     this.Edad = edad;
   }
 
-  // Constructor 2 (Sobrecarga): crea la carrera usando solo su nombre
-  public Persona(String nombre, String apellido, int edad, String nombreCarrera) {
-    carrera = new Carrera(nombreCarrera);
-    this.Nombre = nombre;
-    this.Apellido = apellido;
-    this.Edad = edad;
-  }
-
-  // Métodos
+  // Métodos de comportamiento
   public String darNombreCompleto() {
-    return Apellido + ", " + Nombre;
+    return getApellido() + ", " + getNombre();
   }
 
   public String enviarSaludo(String saludado) {
     if (Edad > 40)
-      return "Buenos dias,querido" + saludado;
-    return "Hola, ¿como estas" + saludado + "?";
+      return "Buenos dias, querido " + saludado;
+    return "Hola, ¿como estas " + saludado + "?";
+  }
+
+  // ==========================================
+  // GETTERS (Lectura controlada)
+  // ==========================================
+  public int getEdad() {
+    return this.Edad;
+  }
+
+  public String getNombre() {
+    return this.Nombre.toUpperCase(); // Retorna en mayúsculas
+  }
+
+  public String getApellido() {
+    return this.Apellido.toUpperCase(); // Retorna en mayúsculas
+  }
+
+  // ==========================================
+  // SETTERS (Modificación controlada)
+  // ==========================================
+  public void setNombre(String nombre) {
+    this.Nombre = nombre;
+  }
+
+  public void setApellido(String apellido) {
+    this.Apellido = apellido;
   }
 }
 ```
 
-#### 3. Uso en `App.java`
+#### 2. Uso de Getters y Setters: `src/App.java`
 
 ```java
 public class App {
     public static void main(String[] args) throws Exception {
-        // Creación limpia en una sola línea gracias al constructor
-        Persona persona1 = new Persona("pedro", "Pascal", 40, "Mandaloriano", 5, true);
+        // Creación e inicialización limpia mediante constructor
+        Persona persona1 = new Persona("pedro", "Pascal", 60);
 
-        // Impresión de datos
-        System.out.println(persona1.darNombreCompleto() + ", " + "tiene " + persona1.Edad
-                + " años y esta recibida de " + persona1.carrera.nombre);
+        // Modificación del estado a través de métodos Setter
+        persona1.setNombre("Ricardo");
+        persona1.setApellido("Darin");
+
+        // Lectura de atributos a través del Getter y métodos de la clase
+        System.out.println(persona1.darNombreCompleto() + ", tiene " + persona1.getEdad() + " años");
     }
 }
 ```
 
----
-
-### 🧠 Tabla Comparativa: Asignación Manual vs Constructores
-
-| Característica | Asignación Manual Anterior | Con Constructores |
-| :--- | :--- | :--- |
-| **Líneas de código** | Múltiples líneas (`obj.a = ...; obj.b = ...;`) | Una sola línea compacta (`new Clase(arg1, arg2);`) |
-| **Riesgo de `null`** | Alto (si olvidas asignar un atributo queda en `null` o `0`) | Mínimo (el constructor exige los parámetros obligatorios) |
-| **Encapsulación** | Débil (los atributos debían ser accesibles directamente) | Fuerte (prepara el camino para hacerlos `private`) |
-| **Flexibilidad** | Sin control de opciones de inicio | Alta (mediante sobrecarga de constructores) |
-
----
-
-### 🖥️ Salida en Consola:
+#### 🖥️ Salida en Consola:
 
 ```text
-Pascal, pedro, tiene 40 años y esta recibida de Mandaloriano
+DARIN, RICARDO, tiene 60 años
 ```
 
----
+---
+
+## 📅 18/09/2026 — Herencia, Palabra Clave `super` y Sobrescritura de Métodos (`@Override`)
+
+En esta sesión se profundiza en el segundo gran pilar de la Programación Orientada a Objetos: la **Herencia**, permitiendo la reutilización de código, el modelado jerárquico del mundo real y la especialización de comportamientos mediante la sobreescritura de métodos.
+
+---
+
+### 🧬 El Concepto de Herencia (Relación Es-Un / *Is-A*)
+
+La **Herencia** es el mecanismo mediante el cual una clase (denominada **subclase** o **clase hija**) adquiere automáticamente los atributos y métodos definidos en otra clase (denominada **superclase** o **clase padre**).
+
+- **Sintaxis en Java:** Se utiliza la palabra reservada `extends`:
+  ```java
+  public class Gato extends Animal { ... }
+  ```
+- **Relación "Es-Un" (*Is-A*):**
+  - Un `Perro` **es un** `Animal`.
+  - Un `Gato` **es un** `Animal`.
+- **Beneficios Principales:**
+  - **Reutilización de código:** No es necesario volver a escribir variables comunes como `nombre` y `edad` en cada animal.
+  - **Mantenimiento centralizado:** Si se agrega una propiedad general a los animales, se define una sola vez en `Animal`.
+  - **Extensibilidad:** Se pueden incorporar nuevas clases hijas sin alterar el código existente.
+
+---
+
+### 🗺️ Diagrama de Jerarquía de Clases (Mermaid)
+
+```mermaid
+classDiagram
+    class Animal {
+        ~String nombre
+        ~int edad
+        +Animal(String, int)
+        +hacerSonido() String
+    }
+
+    class Perro {
+        +Perro(String, int)
+        +hacerSonido() String
+    }
+
+    class Gato {
+        +Gato(String, int)
+        +hacerSonido() String
+    }
+
+    Animal <|-- Perro : hereda de (extends)
+    Animal <|-- Gato : hereda de (extends)
+```
+
+---
+
+### ⬆️ La Palabra Clave `super` y Constructores
+
+Cuando una subclase hereda de una superclase que tiene un constructor con parámetros, la subclase debe invocarlo explícitamente para asegurar que el estado heredado se inicialice de forma correcta.
+
+- Se utiliza la llamada a `super(...)`:
+  ```java
+  public Gato(String nombre, int edad) {
+      // Con la palabra super enviamos la información al constructor de Animal
+      super(nombre, edad);
+  }
+  ```
+- **Regla Fundamental:** La llamada a `super(...)` debe ser obligatoriamente la **primera línea de código** dentro del constructor de la clase hija.
+
+---
+
+### ✍️ Sobrescritura de Métodos y Anotación `@Override`
+
+La **sobrescritura** (*Method Overriding*) permite que una subclase proporcione una implementación personalizada de un método que ya existe en su superclase.
+
+- **Comportamiento Específico:** Aunque todos los animales pueden hacer un sonido general (`"grrr"`), cada animal emite su propio sonido distintivo (`"Miau"` en el gato y `"Guau Guau "` en el perro).
+- **Anotación `@Override`:**
+  - Le indica explícitamente al compilador de Java que la intención es sobreescribir un método de la clase padre.
+  - Si el nombre o los parámetros no coinciden exactamente con los del método padre, el compilador emite un error, previniendo fallos inadvertidos o errores tipográficos.
+
+> [!TIP]
+> **Diferencia entre Sobrecarga y Sobrescritura:**
+> - **Sobrecarga (*Overloading*):** Mismo método en la misma clase con diferente número o tipo de parámetros.
+> - **Sobrescritura (*Overriding*):** Mismo método y misma firma en la subclase para cambiar o especializar el comportamiento heredado.
+
+---
+
+### 💻 Código Actual del Proyecto: Herencia
+
+#### 1. Superclase Padre: `src/Animal.java`
+
+```java
+public class Animal {
+
+  String nombre;
+  int edad;
+
+  public Animal(String nombre, int edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+
+  public String hacerSonido() {
+    return "grrr";
+  }
+}
+```
+
+#### 2. Subclase Hija 1: `src/Gato.java`
+
+```java
+// Con esto especificamos que Gato hereda de Animal
+public class Gato extends Animal {
+
+  public Gato(String nombre, int edad) {
+    // Con la palabra super estamos asignando la información heredada
+    super(nombre, edad);
+  }
+
+  @Override // Sobrescribe el comportamiento del método padre
+  public String hacerSonido() {
+    return "Miau";
+  }
+}
+```
+
+#### 3. Subclase Hija 2: `src/Perro.java`
+
+```java
+public class Perro extends Animal {
+
+  public Perro(String nombre, int edad) {
+    // Con la palabra super estamos asignando la información heredada
+    super(nombre, edad);
+  }
+
+  @Override // Sobrescribe el comportamiento del método padre
+  public String hacerSonido() {
+    return "Guau Guau ";
+  }
+}
+```
+
+#### 4. Demostración en `src/App.java`
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        Animal animal = new Animal("Bestia ", 2000);
+        Gato gato = new Gato("Lucius ", 4);      // Gato hijo de Animal
+        Perro perro = new Perro("Firulais ", 3);  // Perro hijo de Animal
+
+        System.out.println("El animal llamado: " + animal.nombre + "hace:");
+        System.out.println(animal.hacerSonido());
+
+        System.out.println("El gato llamado: " + gato.nombre + "hace:");
+        System.out.println(gato.hacerSonido());
+
+        System.out.println("El perro llamado: " + perro.nombre + "hace:");
+        System.out.println(perro.hacerSonido());
+    }
+}
+```
+
+#### 🖥️ Salida en Consola:
+
+```text
+El animal llamado: Bestia hace:
+grrr
+El gato llamado: Lucius hace:
+Miau
+El perro llamado: Firulais hace:
+Guau Guau 
+```
+
+---
+
