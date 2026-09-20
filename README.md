@@ -1224,3 +1224,122 @@ public class App {
 > ```
 
 ---
+
+## 📅 20/09/2026 — Excepciones Personalizadas y Bloque `finally`
+
+### 🔧 Excepciones Personalizadas en Java
+
+Además de usar las excepciones propias de Java, es posible crear **excepciones personalizadas** extendiendo la clase `Exception`. Esto permite lanzar errores con mensajes y comportamientos específicos para la lógica de negocio de la aplicación.
+
+---
+
+#### 📌 Explicación de los Componentes
+
+* **`DividirPorCeroException`**: Excepción personalizada simple. Extiende `Exception` y sobreescribe `getMessage()` retornando siempre un mensaje fijo: `"No se puede dividir por cero."`.
+* **`CalculadoraException`**: Excepción personalizada con descripción dinámica. Recibe un `String` en su constructor, lo almacena en el atributo `descripcion` y lo expone mediante `getDescripcion()` y `getMessage()`.
+* **Clase `Calculadora`**: Clase de servicio con el método `dividir()`. Declara `throws CalculadoraException`, lo que obliga al código que la llame a manejarla. Si `divisor == 0`, lanza la excepción con `throw new CalculadoraException("/by zero")`.
+* **Bloque `finally`**: Se ejecuta **siempre**, sin importar si el `try` fue exitoso o si el `catch` capturó un error. Ideal para liberar recursos o ejecutar lógica de cierre obligatoria.
+* **Clase `App`**: Instancia `Calculadora`, ejecuta la división dentro del `try`, captura `CalculadoraException` en el `catch` e imprime la descripción, y siempre ejecuta el `finally`.
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+// ===================================================
+// EXCEPCIÓN PERSONALIZADA SIMPLE
+// ===================================================
+package EXCEPTIONS;
+
+public class DividirPorCeroException extends Exception {
+
+  @Override
+  public String getMessage() {
+    return "No se puede dividir por cero.";
+  }
+}
+
+// ===================================================
+// EXCEPCIÓN PERSONALIZADA CON DESCRIPCIÓN DINÁMICA
+// ===================================================
+package EXCEPTIONS;
+
+public class CalculadoraException extends Exception {
+
+  String descripcion;
+
+  public CalculadoraException(String descripcion) {
+    setDescripcion(descripcion);
+  }
+
+  @Override
+  public String getMessage() {
+    return getDescripcion();
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
+}
+
+// ===================================================
+// CLASE DE SERVICIO: CALCULADORA
+// ===================================================
+import EXCEPTIONS.CalculadoraException;
+
+public class Calculadora {
+
+  public int dividir(int dividendo, int divisor) throws CalculadoraException {
+    if (divisor == 0) throw new CalculadoraException("/by zero");
+    return dividendo / divisor;
+  }
+}
+
+// ===================================================
+// CLASE PRINCIPAL DE EJECUCIÓN
+// ===================================================
+import EXCEPTIONS.CalculadoraException;
+
+public class App {
+  public static void main(String[] args) throws Exception {
+
+    int numero1 = 10;
+    int numero2 = 0; // Cambiar a distinto de 0 para ver el resultado exitoso
+    int resultado;
+    Calculadora calculadora = new Calculadora();
+
+    try {
+      resultado = calculadora.dividir(numero1, numero2);
+      System.out.println(resultado);
+
+    } catch (CalculadoraException e) {
+      System.out.println(e.getDescripcion());
+
+    } finally {
+      System.out.println("Hemos finalizado el calculo ya sea exitoso o no");
+    }
+  }
+}
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+> **Cuando `numero2 = 0`** (lanza la excepción):
+> ```
+> /by zero
+> Hemos finalizado el calculo ya sea exitoso o no
+> ```
+
+> **Cuando `numero2 = 5`** (flujo exitoso):
+> ```
+> 2
+> Hemos finalizado el calculo ya sea exitoso o no
+> ```
+
+---
