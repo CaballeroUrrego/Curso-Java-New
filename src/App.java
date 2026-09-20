@@ -1,21 +1,13 @@
 public class App {
         public static void main(String[] args) throws Exception {
 
-                //
-                Animal animal = new Animal("Bestia ", 2000);
-                Gato gato = new Gato("Lucius ", 4); // Gato hijo de animal
-                Perro perro = new Perro("Firulais ", 3); // Perro hijo de animal
-
-                System.out.println("El animal llamado: " + animal.nombre + "hace:");
-                System.out.println(animal.hacerSonido());
-
-                System.out.println("El gato llamado: " + gato.nombre + "hace:");
-                System.out.println(gato.hacerSonido());
-
-                System.out.println("El perro llamado: " + perro.nombre + "hace:");
-                System.out.println(perro.hacerSonido());
-                System.out.println("El total de animales es de : " + Animal.getContadorAnimales());
-                System.out.println("Yo atiendo a mis animalitos en : " + Veterinaria.nombre);
+                // Clase Abstracta, usamos interfaces o clases concretas
+                Circulo circulo = new Circulo(10);
+                Rectangulo rectangulo = new Rectangulo(8, 6);
+                circulo.imprimirInformacion();
+                System.out.println("El area del circulo es : " + circulo.calcularArea());
+                rectangulo.imprimirInformacion();
+                System.out.println("El area del rectangulo es : " + rectangulo.calcularArea());
         }
 
 }
