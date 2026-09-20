@@ -918,5 +918,105 @@ Guau Guau
 El total de animales es de : 3
 Yo atiendo a mis animalitos en : La veterinaria de Ricardo
 ```
+```
+### 📐 Programación Orientada a Objetos: Clases Abstractas y Herencia
 
+Ejemplo práctico de **POO** en Java que demuestra el uso de una **clase abstracta** (`Figura`) para definir un comportamiento obligatorio mediante métodos abstractos, y su implementación en clases concretas (`Circulo` y `Rectangulo`) [1, 2].
+
+---
+
+#### 📌 Explicación de los Componentes
+
+* **Clase Abstracta (`Figura`)**: Funciona como plantilla base. Define el método abstracto `calcularArea()` (sin cuerpo), el cual es de implementación obligatoria para cualquier clase que herede de ella, y un método concreto `imprimirInformacion()` compartido por las subclases [2].
+* **Subclase `Circulo`**: Extiende (`extends`) de `Figura`, almacena el atributo `radio` y sobreescribe (`@Override`) el método `calcularArea()` aplicando la fórmula \\(\pi \times r^2\\) (`Math.PI * radio * radio`) [3, 4].
+* **Subclase `Rectangulo`**: Extiende (`extends`) de `Figura`, define los atributos `lado1` y `lado2`, y sobreescribe el método `calcularArea()` multiplicando ambos lados [4].
+* **Clase Principal (`App`)**: Crea las instancias concretas de `Circulo` y `Rectangulo`, ejecuta sus métodos e imprime el resultado en la consola [5, 6].
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+// ===================================================
+// 1. CLASE ABSTRACTA BASE
+// ===================================================
+public abstract class Figura {
+    
+    // Método abstracto: comportamiento obligatorio en las subclases
+    abstract double calcularArea();
+
+    // Método concreto compartido
+    void imprimirInformacion() {
+        System.out.println("Esta informacion viene desde la clase abstracta");
+    }
+}
+
+// ===================================================
+// 2. SUBCLASE CONCRETA: CIRCULO
+// ===================================================
+public class Circulo extends Figura {
+
+    double radio;
+
+    public Circulo(double radio) {
+        this.radio = radio;
+    }
+
+    @Override
+    double calcularArea() {
+        return Math.PI * radio * radio;
+    }
+}
+
+// ===================================================
+// 3. SUBCLASE CONCRETA: RECTANGULO
+// ===================================================
+public class Rectangulo extends Figura {
+
+    double lado1;
+    double lado2;
+
+    public Rectangulo(double lado1, double lado2) {
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+    }
+
+    @Override
+    double calcularArea() {
+        return lado1 * lado2;
+    }
+}
+
+// ===================================================
+// 4. CLASE PRINCIPAL DE EJECUCIÓN
+// ===================================================
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        // Instanciación de clases concretas
+        Circulo circulo = new Circulo(10);
+        Rectangulo rectangulo = new Rectangulo(8, 6);
+
+        // Ejecución de métodos del Círculo
+        circulo.imprimirInformacion();
+        System.out.println("El area del circulo es : " + circulo.calcularArea());
+
+        // Ejecución de métodos del Rectángulo
+        rectangulo.imprimirInformacion();
+        System.out.println("El area del rectangulo es : " + rectangulo.calcularArea());
+    }
+}
+
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+```
+Esta informacion viene desde la clase abstracta
+El area del circulo es : 314.1592653589793
+Esta informacion viene desde la clase abstracta
+El area del rectangulo es : 48.0
+```
 ---
