@@ -918,7 +918,8 @@ Guau Guau
 El total de animales es de : 3
 Yo atiendo a mis animalitos en : La veterinaria de Ricardo
 ```
-```
+
+````
 ### 📐 Programación Orientada a Objetos: Clases Abstractas y Herencia
 
 Ejemplo práctico de **POO** en Java que demuestra el uso de una **clase abstracta** (`Figura`) para definir un comportamiento obligatorio mediante métodos abstractos, y su implementación en clases concretas (`Circulo` y `Rectangulo`) [1, 2].
@@ -941,7 +942,7 @@ Ejemplo práctico de **POO** en Java que demuestra el uso de una **clase abstrac
 // 1. CLASE ABSTRACTA BASE
 // ===================================================
 public abstract class Figura {
-    
+
     // Método abstracto: comportamiento obligatorio en las subclases
     abstract double calcularArea();
 
@@ -1007,7 +1008,7 @@ public class App {
     }
 }
 
-```
+````
 
 ---
 
@@ -1019,6 +1020,7 @@ El area del circulo es : 314.1592653589793
 Esta informacion viene desde la clase abstracta
 El area del rectangulo es : 48.0
 ```
+
 ---
 
 ## 📅 19/09/2026 — Interfaces + Clase Abstracta: Criaturas Marinas
@@ -1031,11 +1033,11 @@ Ejemplo práctico que combina una **clase abstracta** (`CriaturasMarinas`) con *
 
 #### 📌 Explicación de los Componentes
 
-* **Clase Abstracta `CriaturasMarinas`**: Define el atributo `nombre` y declara el método abstracto `nadar()`, obligando a cada subclase a implementar su propia forma de nadar.
-* **Interfaces `Comunicable` y `Alimentable`**: Contratos adicionales que exigen implementar `comunicarse()` y `alimentar()` respectivamente. Una clase puede implementar múltiples interfaces (`implements`).
-* **Subclase `Delfin`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Su `nadar()` describe movimiento con cola; `comunicarse()` emite chasquidos; `alimentar()` entrega una galleta.
-* **Subclase `Pulpo`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Añade el atributo propio `cantTentaculos` y lo usa en cada comportamiento para personalizar los mensajes.
-* **Clase Principal `App`**: Instancia un `Delfin` y un `Pulpo` y ejecuta los tres comportamientos de cada uno, demostrando el polimorfismo en acción.
+- **Clase Abstracta `CriaturasMarinas`**: Define el atributo `nombre` y declara el método abstracto `nadar()`, obligando a cada subclase a implementar su propia forma de nadar.
+- **Interfaces `Comunicable` y `Alimentable`**: Contratos adicionales que exigen implementar `comunicarse()` y `alimentar()` respectivamente. Una clase puede implementar múltiples interfaces (`implements`).
+- **Subclase `Delfin`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Su `nadar()` describe movimiento con cola; `comunicarse()` emite chasquidos; `alimentar()` entrega una galleta.
+- **Subclase `Pulpo`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Añade el atributo propio `cantTentaculos` y lo usa en cada comportamiento para personalizar los mensajes.
+- **Clase Principal `App`**: Instancia un `Delfin` y un `Pulpo` y ejecuta los tres comportamientos de cada uno, demostrando el polimorfismo en acción.
 
 ---
 
@@ -1169,10 +1171,10 @@ Una **excepción** es un evento inesperado que interrumpe el flujo normal del pr
 
 #### 📌 Explicación de los Componentes
 
-* **Bloque `try`**: Contiene el código que *podría* fallar. Si ocurre un error, la ejecución salta inmediatamente al bloque `catch`, ignorando el resto del `try`.
-* **Bloque `catch (Exception e)`**: Captura el error. La variable `e` contiene toda la información de la excepción. Se usa `e.printStackTrace()` para imprimir el detalle del error en consola y luego el programa continúa su ejecución normalmente.
-* **Casteo `(int)`**: Cuando se divide un `double` entre un `int`, Java no lanza excepción. Sin embargo, si se necesita guardar el resultado en una variable `int`, se debe castear explícitamente con `(int)`.
-* **`ArithmeticException`**: Es el tipo de excepción que lanza Java cuando se intenta dividir un `int` entre `0`. Con `double` esto no ocurre (retorna `Infinity`).
+- **Bloque `try`**: Contiene el código que _podría_ fallar. Si ocurre un error, la ejecución salta inmediatamente al bloque `catch`, ignorando el resto del `try`.
+- **Bloque `catch (Exception e)`**: Captura el error. La variable `e` contiene toda la información de la excepción. Se usa `e.printStackTrace()` para imprimir el detalle del error en consola y luego el programa continúa su ejecución normalmente.
+- **Casteo `(int)`**: Cuando se divide un `double` entre un `int`, Java no lanza excepción. Sin embargo, si se necesita guardar el resultado en una variable `int`, se debe castear explícitamente con `(int)`.
+- **`ArithmeticException`**: Es el tipo de excepción que lanza Java cuando se intenta dividir un `int` entre `0`. Con `double` esto no ocurre (retorna `Infinity`).
 
 ---
 
@@ -1218,6 +1220,7 @@ public class App {
 ```
 
 > Si `numero2` fuera `0`, la salida sería:
+>
 > ```
 > java.lang.ArithmeticException: / by zero at App.main(App.java:16)
 > Esto va despues de la Excepcion
@@ -1235,11 +1238,11 @@ Además de usar las excepciones propias de Java, es posible crear **excepciones 
 
 #### 📌 Explicación de los Componentes
 
-* **`DividirPorCeroException`**: Excepción personalizada simple. Extiende `Exception` y sobreescribe `getMessage()` retornando siempre un mensaje fijo: `"No se puede dividir por cero."`.
-* **`CalculadoraException`**: Excepción personalizada con descripción dinámica. Recibe un `String` en su constructor, lo almacena en el atributo `descripcion` y lo expone mediante `getDescripcion()` y `getMessage()`.
-* **Clase `Calculadora`**: Clase de servicio con el método `dividir()`. Declara `throws CalculadoraException`, lo que obliga al código que la llame a manejarla. Si `divisor == 0`, lanza la excepción con `throw new CalculadoraException("/by zero")`.
-* **Bloque `finally`**: Se ejecuta **siempre**, sin importar si el `try` fue exitoso o si el `catch` capturó un error. Ideal para liberar recursos o ejecutar lógica de cierre obligatoria.
-* **Clase `App`**: Instancia `Calculadora`, ejecuta la división dentro del `try`, captura `CalculadoraException` en el `catch` e imprime la descripción, y siempre ejecuta el `finally`.
+- **`DividirPorCeroException`**: Excepción personalizada simple. Extiende `Exception` y sobreescribe `getMessage()` retornando siempre un mensaje fijo: `"No se puede dividir por cero."`.
+- **`CalculadoraException`**: Excepción personalizada con descripción dinámica. Recibe un `String` en su constructor, lo almacena en el atributo `descripcion` y lo expone mediante `getDescripcion()` y `getMessage()`.
+- **Clase `Calculadora`**: Clase de servicio con el método `dividir()`. Declara `throws CalculadoraException`, lo que obliga al código que la llame a manejarla. Si `divisor == 0`, lanza la excepción con `throw new CalculadoraException("/by zero")`.
+- **Bloque `finally`**: Se ejecuta **siempre**, sin importar si el `try` fue exitoso o si el `catch` capturó un error. Ideal para liberar recursos o ejecutar lógica de cierre obligatoria.
+- **Clase `App`**: Instancia `Calculadora`, ejecuta la división dentro del `try`, captura `CalculadoraException` en el `catch` e imprime la descripción, y siempre ejecuta el `finally`.
 
 ---
 
@@ -1331,15 +1334,186 @@ public class App {
 #### 🖥️ Salida Esperada en Consola
 
 > **Cuando `numero2 = 0`** (lanza la excepción):
+>
 > ```
 > /by zero
 > Hemos finalizado el calculo ya sea exitoso o no
 > ```
 
 > **Cuando `numero2 = 5`** (flujo exitoso):
+>
 > ```
 > 2
 > Hemos finalizado el calculo ya sea exitoso o no
 > ```
+
+---
+
+## 20/09/2026 Colecciones
+
+# Colecciones en Java
+
+Una **colección** es un objeto que agrupa múltiples elementos en una sola unidad[cite: 4]. Estas colecciones proporcionan una forma más conveniente de trabajar con grupos de objetos que las simples matrices (_arrays_) debido a su flexibilidad y funcionalidad adicional[cite: 4].
+
+---
+
+## Tabla Comparativa de Interfaces
+
+| Característica        | Set                                                  | List                                                                                  | Map                                                                                     |
+| :-------------------- | :--------------------------------------------------- | :------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------- |
+| **Orden**             | No hay garantía de orden[cite: 4].                   | Ordenado[cite: 4].                                                                    | No hay garantía de orden en las claves, pero las claves-valor están asociadas[cite: 4]. |
+| **Duplicados**        | No permite elementos duplicados[cite: 4].            | Permite elementos duplicados[cite: 4].                                                | No permite claves duplicadas, pero los valores pueden ser duplicados[cite: 4].          |
+| **Implementaciones**  | `HashSet`, `TreeSet`, `LinkedHashSet`, etc[cite: 4]. | `ArrayList`, `LinkedList`, `Vector`, etc[cite: 4].                                    | `HashMap`, `TreeMap`, `LinkedHashMap`, etc[cite: 4].                                    |
+| **Acceso por índice** | No permite el acceso por índice[cite: 4].            | Permite acceso por índice[cite: 4].                                                   | No permite acceso por índice de clave o valor[cite: 4].                                 |
+| **Búsqueda rápida**   | Buena eficiencia en búsqueda de elementos[cite: 4].  | La eficiencia depende de la implementación[cite: 4].                                  | Buena eficiencia en búsqueda de claves, pero no de valores[cite: 4].                    |
+| **Uso**               | Útil para asegurar elementos únicos[cite: 4].        | Útil para almacenar una secuencia de elementos donde el orden es importante[cite: 4]. | Útil para almacenar asociaciones de claves-valor[cite: 4].                              |
+| **Ejemplo de uso**    | Eliminar duplicados en una lista[cite: 4].           | Mantener una secuencia de elementos en orden[cite: 4].                                | Almacenar pares de datos relacionados[cite: 4].                                         |
+
+# SET: Tipos de Set
+
+Una colección que **no permite elementos duplicados**[cite: 5]. Se utiliza para almacenar elementos únicos sin ningún orden en particular[cite: 5].
+
+---
+
+## Tabla Comparativa: Tipos de Set
+
+| Característica             | HashSet                                                                                                   | TreeSet                                                                                                                                                       | LinkedHashSet                                                                                                                               |
+| :------------------------- | :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Implementación**         | Utiliza una tabla hash para almacenar los elementos[cite: 5].                                             | Utiliza una estructura de árbol rojo-negro para almacenar los elementos, lo que garantiza un orden natural o utilizando un comparador personalizado[cite: 5]. | Utiliza una combinación de tabla hash y lista doblemente enlazada para almacenar los elementos, manteniendo el orden de inserción[cite: 5]. |
+| **Orden**                  | No hay garantía de orden[cite: 5].                                                                        | Ordenado según el criterio natural de los elementos o un comparador personalizado[cite: 5].                                                                   | Mantiene el orden de inserción de los elementos[cite: 5].                                                                                   |
+| **Duplicados**             | No permite elementos duplicados[cite: 5].                                                                 | No permite elementos duplicados[cite: 5].                                                                                                                     | No permite elementos duplicados[cite: 5].                                                                                                   |
+| **Acceso por índice**      | No es posible acceder por índice[cite: 5].                                                                | No es posible acceder por índice[cite: 5].                                                                                                                    | No es posible acceder por índice[cite: 5].                                                                                                  |
+| **Eficiencia en búsqueda** | Búsqueda rápida en promedio, O(1) para operaciones de agregar, eliminar y comprobar si contiene[cite: 5]. | Búsqueda más lenta debido a la estructura de árbol, O(log n) para operaciones de agregar, eliminar y comprobar si contiene[cite: 5].                          | Búsqueda rápida en promedio, O(1) para operaciones de agregar, eliminar y comprobar si contiene[cite: 5].                                   |
+| **Uso común**              | Útil cuando no se necesita ningún orden particular y se requiere una búsqueda rápida[cite: 5].            | Útil cuando se necesita un conjunto ordenado de elementos, ya sea naturalmente o por un criterio personalizado[cite: 5].                                      | Útil cuando se necesita mantener el orden de inserción de los elementos y aún así se desea una búsqueda rápida[cite: 5].                    |
+
+# LIST: Tipos de List
+
+Una **colección ordenada de elementos** que **permite elementos duplicados**[cite: 6]. Los elementos en una lista están **indexados** y se pueden acceder por su **posición**[cite: 6].
+
+---
+
+## Tabla Comparativa: Tipos de List
+
+| Característica              | ArrayList                                                                                                                                             | LinkedList                                                                                                                                                               | Vector                                                                                                                                                                              |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Implementación**          | Utiliza un arreglo dinámico para almacenar los elementos[cite: 6].                                                                                    | Utiliza una lista doblemente enlazada para almacenar los elementos[cite: 6].                                                                                             | Utiliza un arreglo dinámico similar a ArrayList, pero es sincronizado, lo que garantiza seguridad en entornos multihilo[cite: 6].                                                   |
+| **Acceso por índice**       | Acceso rápido a los elementos por índice, O(1)[cite: 6].                                                                                              | Acceso más lento a los elementos por índice debido a la necesidad de recorrer la lista, O(n)[cite: 6].                                                                   | Acceso rápido a los elementos por índice, O(1), similar a ArrayList[cite: 6].                                                                                                       |
+| **Inserción y eliminación** | Más lento para inserciones y eliminaciones en el medio de la lista debido a la necesidad de desplazar elementos, O(n)[cite: 6].                       | Más rápido para inserciones y eliminaciones en el medio de la lista debido a la estructura de lista enlazada, O(1)[cite: 6].                                             | Similar a ArrayList en términos de rendimiento para inserciones y eliminaciones[cite: 6].                                                                                           |
+| **Eficiencia en memoria**   | Puede desperdiciar algo de memoria debido al tamaño fijo del arreglo interno[cite: 6].                                                                | Usa más memoria debido a los punteros adicionales en cada nodo[cite: 6].                                                                                                 | Similar a ArrayList en términos de uso de memoria[cite: 6].                                                                                                                         |
+| **Iteración**               | Iteración rápida a través de los elementos, especialmente para acceder a través de bucles for[cite: 6].                                               | Iteración más lenta debido a la necesidad de seguir enlaces de nodo a nodo[cite: 6].                                                                                     | Similar a ArrayList en términos de iteración[cite: 6].                                                                                                                              |
+| **Uso común**               | Útil cuando se necesita un acceso rápido a los elementos por índice y se realizan pocas inserciones y eliminaciones en el medio de la lista[cite: 6]. | Útil cuando se realizan muchas inserciones y eliminaciones en el medio de la lista, o cuando se necesita una lista sincronizada para uso en entornos multihilo[cite: 6]. | Menos comúnmente usado en comparación con ArrayList y LinkedList debido a su sincronización[cite: 6]. Se usa en situaciones donde se requiere una lista segura para hilos[cite: 6]. |
+
+# MAP: Tipos de Maps
+
+Una **colección de pares clave-valor** donde cada **clave es única**[cite: 7].
+
+Se utiliza para **almacenar asociaciones de datos** donde cada **clave está asociada con un único valor**[cite: 7].
+
+_No permite claves duplicadas, pero los valores pueden ser duplicados[cite: 7]._
+
+---
+
+## Tabla Comparativa: Tipos de Map
+
+| Característica             | HashMap                                                                                                        | TreeMap                                                                                                                            | LinkedHashMap                                                                                                           |
+| :------------------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| **Implementación**         | Utiliza una tabla hash para almacenar las entradas[cite: 7].                                                   | Utiliza una estructura de árbol rojo-negro para almacenar las entradas, lo que garantiza un orden natural de las claves[cite: 7].  | Combina una tabla hash con una lista doblemente enlazada para mantener el orden de inserción de las entradas[cite: 7].  |
+| **Orden de las entradas**  | No hay garantía de orden en las entradas[cite: 7].                                                             | Las entradas están ordenadas según las claves, ya sea naturalmente o utilizando un comparador personalizado[cite: 7].              | Mantiene el orden de inserción de las entradas[cite: 7].                                                                |
+| **Eficiencia en búsqueda** | Búsqueda rápida en promedio, O(1) para operaciones de agregar, eliminar y obtener[cite: 7].                    | Búsqueda más lenta debido a la estructura de árbol, O(log n) para operaciones de agregar, eliminar y obtener[cite: 7].             | Búsqueda rápida en promedio, O(1) para operaciones de agregar, eliminar y obtener[cite: 7].                             |
+| **Uso común**              | Útil cuando no se necesita ningún orden particular en las entradas y se requiere una búsqueda rápida[cite: 7]. | Útil cuando se necesita un mapa ordenado según las claves, ya sea naturalmente o por un criterio personalizado[cite: 7].           | Útil cuando se necesita mantener el orden de inserción de las entradas y aún así se desea una búsqueda rápida[cite: 7]. |
+| **Iteración**              | Iteración rápida a través de las entradas, sin garantía de orden[cite: 7].                                     | Iteración lenta debido a la necesidad de mantener el orden de las claves, pero el orden garantizado durante la iteración[cite: 7]. | Iteración rápida a través de las entradas, manteniendo el orden de inserción[cite: 7].                                  |
+
+---
+
+### 🦸 Ejemplo Práctico: `Set` — La Fiesta de los Superhéroes
+
+Ejemplo que demuestra el uso de la interfaz `Set` y sus tres implementaciones principales (`HashSet`, `TreeSet`, `LinkedHashSet`), aplicando los métodos esenciales mediante una lista de superhéroes.
+
+---
+
+#### 📌 Explicación de los Componentes
+
+- **`Set<String>`**: Interfaz que garantiza que **no haya elementos duplicados**. Se declara como tipo genérico `Set` para poder intercambiar la implementación fácilmente.
+- **`HashSet`**: No garantiza ningún orden de los elementos.
+- **`TreeSet`**: Ordena los elementos **alfabéticamente** de forma automática.
+- **`LinkedHashSet`** _(implementación usada)_: Mantiene el **orden de inserción** de los elementos. Al intentar agregar `"Iron Man"` o `"Superman"` por segunda vez, el `Set` simplemente lo ignora sin error.
+- **`.add()`**: Agrega un elemento. Si ya existe, no hace nada (sin lanzar error).
+- **`.contains()`**: Verifica si un elemento existe dentro del `Set` → retorna `true` / `false`.
+- **`.remove()`**: Elimina un elemento específico del `Set`.
+- **`.isEmpty()`**: Verifica si el `Set` está vacío → retorna `true` / `false`.
+- **`.size()`**: Retorna el número de elementos actuales en el `Set`.
+- **`for-each`**: Itera sobre cada elemento del `Set` para imprimirlo.
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+import java.util.LinkedHashSet;
+import java.util.Set;
+// import java.util.HashSet;   // Sin orden garantizado
+// import java.util.TreeSet;   // Orden alfabético automático
+
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        System.out.println("Bienvenido a la fiesta de los superheroes");
+
+        // LinkedHashSet mantiene el orden en el cual se agregaron
+        Set<String> superHeroes = new LinkedHashSet<>();
+        superHeroes.add("Spiderman");
+        superHeroes.add("Batman");
+        superHeroes.add("Catwoman");
+        superHeroes.add("Hulk");
+        superHeroes.add("Iron Man");
+        superHeroes.add("Wonder Woman");
+        superHeroes.add("Superman");
+        superHeroes.add("Iron Man"); // Duplicado: el Set lo ignora silenciosamente
+
+        if (superHeroes.contains("Spiderman")) {
+            System.out.println("Spiderman esta el la fiesta");
+        }
+
+        superHeroes.remove("Hulk");
+        if (!superHeroes.contains("Hulk")) {
+            System.out.println("Hulk Se ha ido de la fiesta");
+        }
+
+        // Intentos de agregar "Superman" repetidas veces: el Set los ignora
+        superHeroes.add("Superman");
+        superHeroes.add("Superman");
+        superHeroes.add("Superman");
+
+        if (superHeroes.isEmpty()) {
+            System.out.println("La fiesta ha terminado todos se han ido");
+        } else {
+            System.out.println("La fiesta continua aun hay " + superHeroes.size() + " superheroes ");
+        }
+
+        System.out.println("¿Quienes estan aun en la fiesta?");
+        for (String superHero : superHeroes) {
+            System.out.println(superHero);
+        }
+    }
+}
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+```
+Bienvenido a la fiesta de los superheroes
+Spiderman esta el la fiesta
+Hulk Se ha ido de la fiesta
+La fiesta continua aun hay 6 superheroes
+¿Quienes estan aun en la fiesta?
+Spiderman
+Batman
+Catwoman
+Iron Man
+Wonder Woman
+Superman
+```
 
 ---
