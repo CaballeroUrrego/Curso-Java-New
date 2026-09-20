@@ -1158,3 +1158,69 @@ Estamos alimentando con peces a  Gonsalez
 ```
 
 ---
+
+## 📅 20/09/2026 — Manejo de Excepciones (`try-catch`)
+
+### ⚠️ Excepciones en Java
+
+Una **excepción** es un evento inesperado que interrumpe el flujo normal del programa. Java proporciona el bloque `try-catch` para capturarlas y manejarlas sin que la aplicación se cierre abruptamente.
+
+---
+
+#### 📌 Explicación de los Componentes
+
+* **Bloque `try`**: Contiene el código que *podría* fallar. Si ocurre un error, la ejecución salta inmediatamente al bloque `catch`, ignorando el resto del `try`.
+* **Bloque `catch (Exception e)`**: Captura el error. La variable `e` contiene toda la información de la excepción. Se usa `e.printStackTrace()` para imprimir el detalle del error en consola y luego el programa continúa su ejecución normalmente.
+* **Casteo `(int)`**: Cuando se divide un `double` entre un `int`, Java no lanza excepción. Sin embargo, si se necesita guardar el resultado en una variable `int`, se debe castear explícitamente con `(int)`.
+* **`ArithmeticException`**: Es el tipo de excepción que lanza Java cuando se intenta dividir un `int` entre `0`. Con `double` esto no ocurre (retorna `Infinity`).
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+public class App {
+    public static void main(String[] args) throws Exception {
+        // Excepciones: Eventos que interrumpen el flujo normal de la aplicación.
+
+        // --- CÓDIGO ACTIVO ---
+        double numero1 = 10;
+        int numero2 = 5;
+        int resultado;
+
+        // NOTA: Si ejecutas sin try-catch y hay un error (división por cero), la
+        // terminal te mostrará:
+        // Exception in thread "main" java.lang.ArithmeticException: / by zero at App.main(App.java:8)
+        // Y las líneas de abajo no se ejecutarán. La manera de manejarlo es con Catch.
+
+        try {
+            // OPERACIÓN: Casteamos double (numero1) a int para poder guardarlo en 'resultado'
+            resultado = (int) numero1 / numero2;
+            System.out.println(resultado);
+
+        } catch (Exception e) {
+            // Si numero2 fuera 0, la división fallaría y saltaría a esta sección
+            e.printStackTrace(); // Muestra el detalle del error en consola
+
+            // Continúa la ejecución normal sin cerrar el programa bruscamente
+            System.out.println("Esto va despues de la Excepcion");
+        }
+    }
+}
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+```
+2
+```
+
+> Si `numero2` fuera `0`, la salida sería:
+> ```
+> java.lang.ArithmeticException: / by zero at App.main(App.java:16)
+> Esto va despues de la Excepcion
+> ```
+
+---
