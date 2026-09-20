@@ -1,21 +1,18 @@
 public class App {
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-                //
-                Animal animal = new Animal("Bestia ", 2000);
-                Gato gato = new Gato("Lucius ", 4); // Gato hijo de animal
-                Perro perro = new Perro("Firulais ", 3); // Perro hijo de animal
+        Delfin  delfin = new Delfin ("Adolfina");
+        
+   Pulpo   pulpo = new Pulpo ("Gonsalez",8);
+        delfin.comunicarse();
+        delfin.nadar();
+        delfin.alimentar();
 
-                System.out.println("El animal llamado: " + animal.nombre + "hace:");
-                System.out.println(animal.hacerSonido());
+        pulpo.comunicarse();
+        pulpo.nadar();
+        pulpo.alimentar();
 
-                System.out.println("El gato llamado: " + gato.nombre + "hace:");
-                System.out.println(gato.hacerSonido());
-
-                System.out.println("El perro llamado: " + perro.nombre + "hace:");
-                System.out.println(perro.hacerSonido());
-                System.out.println("El total de animales es de : " + Animal.getContadorAnimales());
-                System.out.println("Yo atiendo a mis animalitos en : " + Veterinaria.nombre);
+        
         }
 
 }

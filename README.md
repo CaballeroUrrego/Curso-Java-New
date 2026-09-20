@@ -918,5 +918,243 @@ Guau Guau
 El total de animales es de : 3
 Yo atiendo a mis animalitos en : La veterinaria de Ricardo
 ```
+```
+### 📐 Programación Orientada a Objetos: Clases Abstractas y Herencia
+
+Ejemplo práctico de **POO** en Java que demuestra el uso de una **clase abstracta** (`Figura`) para definir un comportamiento obligatorio mediante métodos abstractos, y su implementación en clases concretas (`Circulo` y `Rectangulo`) [1, 2].
+
+---
+
+#### 📌 Explicación de los Componentes
+
+* **Clase Abstracta (`Figura`)**: Funciona como plantilla base. Define el método abstracto `calcularArea()` (sin cuerpo), el cual es de implementación obligatoria para cualquier clase que herede de ella, y un método concreto `imprimirInformacion()` compartido por las subclases [2].
+* **Subclase `Circulo`**: Extiende (`extends`) de `Figura`, almacena el atributo `radio` y sobreescribe (`@Override`) el método `calcularArea()` aplicando la fórmula \\(\pi \times r^2\\) (`Math.PI * radio * radio`) [3, 4].
+* **Subclase `Rectangulo`**: Extiende (`extends`) de `Figura`, define los atributos `lado1` y `lado2`, y sobreescribe el método `calcularArea()` multiplicando ambos lados [4].
+* **Clase Principal (`App`)**: Crea las instancias concretas de `Circulo` y `Rectangulo`, ejecuta sus métodos e imprime el resultado en la consola [5, 6].
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+// ===================================================
+// 1. CLASE ABSTRACTA BASE
+// ===================================================
+public abstract class Figura {
+    
+    // Método abstracto: comportamiento obligatorio en las subclases
+    abstract double calcularArea();
+
+    // Método concreto compartido
+    void imprimirInformacion() {
+        System.out.println("Esta informacion viene desde la clase abstracta");
+    }
+}
+
+// ===================================================
+// 2. SUBCLASE CONCRETA: CIRCULO
+// ===================================================
+public class Circulo extends Figura {
+
+    double radio;
+
+    public Circulo(double radio) {
+        this.radio = radio;
+    }
+
+    @Override
+    double calcularArea() {
+        return Math.PI * radio * radio;
+    }
+}
+
+// ===================================================
+// 3. SUBCLASE CONCRETA: RECTANGULO
+// ===================================================
+public class Rectangulo extends Figura {
+
+    double lado1;
+    double lado2;
+
+    public Rectangulo(double lado1, double lado2) {
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+    }
+
+    @Override
+    double calcularArea() {
+        return lado1 * lado2;
+    }
+}
+
+// ===================================================
+// 4. CLASE PRINCIPAL DE EJECUCIÓN
+// ===================================================
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        // Instanciación de clases concretas
+        Circulo circulo = new Circulo(10);
+        Rectangulo rectangulo = new Rectangulo(8, 6);
+
+        // Ejecución de métodos del Círculo
+        circulo.imprimirInformacion();
+        System.out.println("El area del circulo es : " + circulo.calcularArea());
+
+        // Ejecución de métodos del Rectángulo
+        rectangulo.imprimirInformacion();
+        System.out.println("El area del rectangulo es : " + rectangulo.calcularArea());
+    }
+}
+
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+```
+Esta informacion viene desde la clase abstracta
+El area del circulo es : 314.1592653589793
+Esta informacion viene desde la clase abstracta
+El area del rectangulo es : 48.0
+```
+---
+
+## 📅 19/09/2026 — Interfaces + Clase Abstracta: Criaturas Marinas
+
+### 🐋 Interfaces + Clase Abstracta: Criaturas Marinas
+
+Ejemplo práctico que combina una **clase abstracta** (`CriaturasMarinas`) con **interfaces** (`Comunicable`, `Alimentable`) para modelar criaturas del océano con comportamientos obligatorios y compartidos.
+
+---
+
+#### 📌 Explicación de los Componentes
+
+* **Clase Abstracta `CriaturasMarinas`**: Define el atributo `nombre` y declara el método abstracto `nadar()`, obligando a cada subclase a implementar su propia forma de nadar.
+* **Interfaces `Comunicable` y `Alimentable`**: Contratos adicionales que exigen implementar `comunicarse()` y `alimentar()` respectivamente. Una clase puede implementar múltiples interfaces (`implements`).
+* **Subclase `Delfin`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Su `nadar()` describe movimiento con cola; `comunicarse()` emite chasquidos; `alimentar()` entrega una galleta.
+* **Subclase `Pulpo`**: Extiende `CriaturasMarinas` e implementa ambas interfaces. Añade el atributo propio `cantTentaculos` y lo usa en cada comportamiento para personalizar los mensajes.
+* **Clase Principal `App`**: Instancia un `Delfin` y un `Pulpo` y ejecuta los tres comportamientos de cada uno, demostrando el polimorfismo en acción.
+
+---
+
+#### 💻 Código del Ejemplo
+
+```java
+// ===================================================
+// CLASE ABSTRACTA BASE
+// ===================================================
+public abstract class CriaturasMarinas {
+
+  // Atributo
+  String nombre;
+
+  public CriaturasMarinas(String nombre) {
+    this.nombre = nombre;
+  }
+
+  // Obliga a sobrescribir nadar() en las subclases
+  public abstract void nadar();
+}
+
+// ===================================================
+// INTERFACES
+// ===================================================
+package interfaces;
+public interface Comunicable {
+  void comunicarse();
+}
+
+package interfaces;
+public interface Alimetable {
+  void alimentar();
+}
+
+// ===================================================
+// SUBCLASE: DELFIN
+// ===================================================
+public class Delfin extends CriaturasMarinas implements Comunicable, Alimetable {
+
+  public Delfin(String nombre) {
+    super(nombre);
+  }
+
+  @Override
+  public void nadar() {
+    System.out.println(nombre + " esta nadando en velicidad con su cola y saltando con su cola ");
+  }
+
+  @Override
+  public void comunicarse() {
+    System.out.println(nombre + " Emite sonidos y chasquidos para comunicarse");
+  }
+
+  @Override
+  public void alimentar() {
+    System.out.println("le dimos de comer una galleta " + nombre);
+  }
+}
+
+// ===================================================
+// SUBCLASE: PULPO
+// ===================================================
+public class Pulpo extends CriaturasMarinas implements Comunicable, Alimetable {
+
+  int cantTentaculos;
+
+  public Pulpo(String nombre, int cantTentaculos) {
+    super(nombre);
+    this.cantTentaculos = cantTentaculos;
+  }
+
+  @Override
+  public void nadar() {
+    System.out.println(nombre + " esta nadando Con sus " + cantTentaculos + " tentaculos ");
+  }
+
+  @Override
+  public void comunicarse() {
+    System.out.println(nombre + " Saluda con sus " + cantTentaculos + " tentaculos ");
+  }
+
+  @Override
+  public void alimentar() {
+    System.out.println("Estamos alimentando con peces a  " + nombre);
+  }
+}
+
+// ===================================================
+// CLASE PRINCIPAL DE EJECUCIÓN
+// ===================================================
+public class App {
+  public static void main(String[] args) throws Exception {
+
+    Delfin delfin = new Delfin("Adolfina");
+    Pulpo pulpo = new Pulpo("Gonsalez", 8);
+
+    delfin.comunicarse();
+    delfin.nadar();
+    delfin.alimentar();
+
+    pulpo.comunicarse();
+    pulpo.nadar();
+    pulpo.alimentar();
+  }
+}
+```
+
+---
+
+#### 🖥️ Salida Esperada en Consola
+
+```
+Adolfina Emite sonidos y chasquidos para comunicarse
+Adolfina esta nadando en velicidad con su cola y saltando con su cola
+le dimos de comer una galleta Adolfina
+Gonsalez Saluda con sus 8 tentaculos
+Gonsalez esta nadando Con sus 8 tentaculos
+Estamos alimentando con peces a  Gonsalez
+```
 
 ---
