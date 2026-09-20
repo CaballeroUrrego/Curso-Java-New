@@ -48,6 +48,11 @@
    - [Uso de `static` para datos globales](#-uso-de-static-para-datos-globales)
    - [Código de la clase `Veterinaria`](#-código-de-la-clase-veterinaria)
    - [Demostración en `App.java`](#-demostración-en-appjava)
+10. [📅 20/09/2026 — Ejemplo Práctico: `List` con `Vector` — La Fiesta de los Superhéroes](#-20092026--ejemplo-práctico-list-con-vector--la-fiesta-de-los-superhéroes)
+    - [Métodos Esenciales de `List`](#-métodos-esenciales-de-list)
+    - [Diferencias clave: `ArrayList` vs `LinkedList` vs `Vector`](#-diferencias-clave-arraylist-vs-linkedlist-vs-vector)
+    - [Código del Ejemplo](#-código-del-ejemplo-1)
+    - [Salida Esperada en Consola](#-salida-esperada-en-consola-1)
 
 ---
 
@@ -1515,5 +1520,136 @@ Iron Man
 Wonder Woman
 Superman
 ```
+
+---
+
+## 📅 20/09/2026 — Ejemplo Práctico: `List` con `Vector` — La Fiesta de los Superhéroes
+
+En esta sección se exploran las diferencias entre `Set` y `List`, y cómo usar los métodos específicos de la interfaz `List` como `get()`, `set()` y `remove(index)`. Se usa `Vector` como implementación, que funciona igual que `ArrayList` pero es **sincronizada** (segura para hilos).
+
+---
+
+### 🛠️ Métodos Esenciales de `List`
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `.add(elemento)` | Agrega un elemento al **final** de la lista. Permite **duplicados**. | `superHeroes.add("Batman")` |
+| `.get(índice)` | Retorna el elemento ubicado en la posición indicada (base `0`). | `superHeroes.get(0)` → `"Spiderman"` |
+| `.set(índice, elemento)` | **Reemplaza** el elemento en la posición indicada por uno nuevo. | `superHeroes.set(6, "Tony Stark")` |
+| `.remove(índice)` | Elimina el elemento en la posición indicada y desplaza los demás. | `superHeroes.remove(3)` → elimina `"Hulk"` |
+| `.remove(objeto)` | Elimina la **primera** ocurrencia del objeto especificado. | `superHeroes.remove("Hulk")` |
+| `.contains(elemento)` | Retorna `true` si el elemento existe en la lista. | `superHeroes.contains("Spiderman")` |
+| `.isEmpty()` | Retorna `true` si la lista está vacía. | `superHeroes.isEmpty()` |
+| `.size()` | Retorna el número total de elementos (contando duplicados). | `superHeroes.size()` → `6` |
+
+> [!TIP]
+> A diferencia de `Set`, en una `List` **`.remove(3)`** elimina el elemento en el **índice 3**, no el objeto con valor `3`. Usar `remove("Hulk")` elimina por **nombre de objeto**.
+
+---
+
+### ⚖️ Diferencias clave: `ArrayList` vs `LinkedList` vs `Vector`
+
+| Característica | `ArrayList` | `LinkedList` | `Vector` |
+| :--- | :---: | :---: | :---: |
+| **¿Permite duplicados?** | Sí |  Sí |  Sí |
+| **¿Mantiene el orden de inserción?** |  Sí |  Sí |  Sí |
+| **Acceso por índice** |  Rápido `O(1)` |  Lento `O(n)` |  Rápido `O(1)` |
+| **Inserción/eliminación al medio** |  Lento `O(n)` |  Rápido `O(1)` |  Lento `O(n)` |
+| **Seguridad en hilos (Thread-safe)** |  No | No |  Sí |
+| **Uso recomendado** | Uso general | Muchas inserciones/eliminaciones | Entornos multihilo |
+
+> [!NOTE]
+> En la práctica moderna, `ArrayList` es la implementación más usada. `Vector` es funcionalmente equivalente pero sincronizado, lo que lo hace más seguro pero ligeramente más lento en aplicaciones de un solo hilo.
+
+---
+
+### 💻 Código del Ejemplo
+
+```java
+import java.util.List;
+import java.util.Vector;
+// import java.util.ArrayList;   // Alternativa más común, no sincronizada
+// import java.util.LinkedList;  // Mejor para muchas inserciones/eliminaciones
+
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        System.out.println("Bienvenido a la fiesta de los superheroes");
+
+        // Vector: igual que ArrayList pero sincronizado (thread-safe)
+        List<String> superHeroes = new Vector<>();
+        superHeroes.add("Spiderman");    // índice 0
+        superHeroes.add("Batman");       // índice 1
+        superHeroes.add("Catwoman");     // índice 2
+        superHeroes.add("Hulk");         // índice 3
+        superHeroes.add("Wonder Woman"); // índice 4
+        superHeroes.add("Superman");     // índice 5
+        superHeroes.add("Iron Man");     // índice 6 — llegó tarde a la fiesta
+
+        //  .contains() — verifica si un elemento existe
+        if (superHeroes.contains("Spiderman")) {
+            System.out.println("Spiderman esta el la fiesta");
+        }
+
+        // .get(índice) — accede al elemento en la posición indicada (base 0)
+        System.out.println("¿hay un superherue que ya esta borracho el super heroe es " + superHeroes.get(0));
+
+        // .set(índice, nuevoValor) — reemplaza el elemento en esa posición
+        superHeroes.set(6, "Tony Stark"); // Iron Man se revela como Tony Stark
+        System.out.println("Iron man se saca el traje mostrando su verdadera forma  " + superHeroes.get(6));
+
+        //  .remove(índice) — elimina por posición (no por nombre de objeto)
+        superHeroes.remove(3); // elimina "Hulk" que estaba en el índice 3
+        if (!superHeroes.contains("Hulk")) {
+            System.out.println("Hulk Se ha ido de la fiesta");
+        }
+
+        //  .isEmpty() y .size() — estado general de la lista
+        if (superHeroes.isEmpty()) {
+            System.out.println("La fiesta ha terminado todos se han ido");
+        } else {
+            System.out.println("La fiesta continua aun hay " + superHeroes.size() + " superheroes ");
+        }
+
+        //  for-each — itera sobre todos los elementos en orden de inserción
+        System.out.println("¿Quienes estan aun en la fiesta? ");
+        for (String superHero : superHeroes) {
+            System.out.println(superHero);
+        }
+    }
+}
+```
+
+---
+
+### 🖥️ Salida Esperada en Consola
+
+```
+Bienvenido a la fiesta de los superheroes
+Spiderman esta el la fiesta
+¿hay un superherue que ya esta borracho el super heroe es Spiderman
+Iron man se saca el traje mostrando su verdadera forma  Tony Stark
+Hulk Se ha ido de la fiesta
+La fiesta continua aun hay 6 superheroes
+¿Quienes estan aun en la fiesta?
+Spiderman
+Batman
+Catwoman
+Wonder Woman
+Superman
+Tony Stark
+```
+
+#### 🔍 Análisis paso a paso
+
+| Paso | Operación | Lista resultante | Tamaño |
+| :---: | :--- | :--- | :---: |
+| 1 | Se agregan 7 héroes | `[Spiderman, Batman, Catwoman, Hulk, Wonder Woman, Superman, Iron Man]` | 7 |
+| 2 | `.get(0)` | Retorna `"Spiderman"` sin modificar la lista | 7 |
+| 3 | `.set(6, "Tony Stark")` | `[Spiderman, Batman, Catwoman, Hulk, Wonder Woman, Superman, Tony Stark]` | 7 |
+| 4 | `.remove(3)` | Elimina `"Hulk"` → `[Spiderman, Batman, Catwoman, Wonder Woman, Superman, Tony Stark]` | **6** |
+
+> [!IMPORTANT]
+> **¿Por qué `set(6, ...)` antes de `remove(3)`?** El orden importa. Si se eliminara primero `remove(3)` (Hulk), `"Iron Man"` pasaría a ser el índice `5`, y `set(6, ...)` lanzaría un `IndexOutOfBoundsException`. Siempre considera cómo cambian los índices al eliminar elementos.
 
 ---
