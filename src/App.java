@@ -1,13 +1,18 @@
 public class App {
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-                // Clase Abstracta, usamos interfaces o clases concretas
-                Circulo circulo = new Circulo(10);
-                Rectangulo rectangulo = new Rectangulo(8, 6);
-                circulo.imprimirInformacion();
-                System.out.println("El area del circulo es : " + circulo.calcularArea());
-                rectangulo.imprimirInformacion();
-                System.out.println("El area del rectangulo es : " + rectangulo.calcularArea());
+        Delfin  delfin = new Delfin ("Adolfina");
+        
+   Pulpo   pulpo = new Pulpo ("Gonsalez",8);
+        delfin.comunicarse();
+        delfin.nadar();
+        delfin.alimentar();
+
+        pulpo.comunicarse();
+        pulpo.nadar();
+        pulpo.alimentar();
+
+        
         }
 
 }
