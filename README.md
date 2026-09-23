@@ -53,6 +53,13 @@
     - [Diferencias clave: `ArrayList` vs `LinkedList` vs `Vector`](#-diferencias-clave-arraylist-vs-linkedlist-vs-vector)
     - [Código del Ejemplo](#-código-del-ejemplo-1)
     - [Salida Esperada en Consola](#-salida-esperada-en-consola-1)
+11. [📅 23/09/2026 — `Map` con `LinkedHashMap`: Inventario de Frutas y Verduras](#-23092026--map-con-linkedhashmap-inventario-de-frutas-y-verduras)
+  - [¿Qué es un `Map`?](#-qué-es-un-map)
+  - [Diferencias entre `HashMap`, `TreeMap` y `LinkedHashMap`](#-diferencias-entre-hashmap-treemap-y-linkedhashmap)
+  - [Carga y recorrido del inventario](#-carga-y-recorrido-del-inventario)
+  - [Búsqueda y eliminación de productos](#-búsqueda-y-eliminación-de-productos)
+  - [Código completo](#-código-completo-2)
+  - [Flujo del programa](#-flujo-del-programa-1)
 
 ---
 
@@ -1651,5 +1658,174 @@ Tony Stark
 
 > [!IMPORTANT]
 > **¿Por qué `set(6, ...)` antes de `remove(3)`?** El orden importa. Si se eliminara primero `remove(3)` (Hulk), `"Iron Man"` pasaría a ser el índice `5`, y `set(6, ...)` lanzaría un `IndexOutOfBoundsException`. Siempre considera cómo cambian los índices al eliminar elementos.
+
+---
+
+## 📅 23/09/2026 — `Map` con `LinkedHashMap`: Inventario de Frutas y Verduras
+
+En este ejercicio se crea un inventario de frutas y verduras. Cada fruta se relaciona con su precio mediante una estructura de datos formada por pares **clave-valor**.
+
+### 🗺️ ¿Qué es un `Map`?
+
+`Map` es una interfaz de Java que almacena información asociando una **clave** con un **valor**.
+
+En este ejemplo:
+
+- La clave es el nombre de la fruta (`String`).
+- El valor es el precio de la fruta (`Double`).
+- No se pueden repetir las claves. Si se agrega una fruta que ya existe, su precio se actualiza.
+
+```java
+Map<String, Double> inventario = new LinkedHashMap<>();
+```
+
+`Map<String, Double>` indica que el mapa tendrá claves de tipo `String` y valores de tipo `Double`. La interfaz se utiliza como tipo de referencia, mientras que `LinkedHashMap` es la implementación concreta.
+
+### ⚖️ Diferencias entre `HashMap`, `TreeMap` y `LinkedHashMap`
+
+El código deja comentadas dos alternativas para comparar el comportamiento de las implementaciones de `Map`:
+
+| Implementación | Orden de los elementos | Característica principal |
+| :--- | :--- | :--- |
+| `HashMap` | No garantizado | Generalmente ofrece un acceso rápido. |
+| `TreeMap` | Orden natural de las claves | Ordena las frutas alfabéticamente. |
+| `LinkedHashMap` | Orden de inserción | Conserva el orden en que se agregaron las frutas. |
+
+En el programa se utiliza `LinkedHashMap`, por eso el inventario se muestra en este orden: `Banana`, `Tomate`, `Palta`, `Frutilla` y `Pimiento`.
+
+### ➕ Carga y recorrido del inventario
+
+Primero se importan las clases necesarias:
+
+```java
+import java.util.LinkedHashMap;
+import java.util.Map;
+```
+
+Después se crea el mapa y se agregan las frutas con `.put()`:
+
+```java
+Map<String, Double> inventario = new LinkedHashMap<>();
+
+inventario.put("Banana", 0.89);
+inventario.put("Tomate", 0.75);
+inventario.put("Palta", 0.95);
+inventario.put("Frutilla", 0.65);
+inventario.put("Pimiento", 0.77);
+```
+
+Cada llamada a `.put()` guarda una clave y su valor asociado. Por ejemplo, la clave `"Banana"` tiene asociado el precio `0.89`.
+
+Para recorrer las frutas se utiliza `.keySet()` junto con un bucle `for-each`:
+
+```java
+for (String fruta : inventario.keySet()) {
+  System.out.println(fruta + " : $" + inventario.get(fruta));
+}
+```
+
+- `.keySet()` devuelve todas las claves del mapa.
+- La variable `fruta` recibe una clave en cada repetición.
+- `.get(fruta)` obtiene el precio asociado a esa clave.
+- Como se usa `LinkedHashMap`, el recorrido mantiene el orden de inserción.
+
+### 🔎 Búsqueda y eliminación de productos
+
+La fruta solicitada por el cliente se guarda en `frutaBuscada`:
+
+```java
+String frutaBuscada = "Frutilla";
+```
+
+El método `.containsKey()` verifica si esa fruta existe como clave:
+
+```java
+if (inventario.containsKey(frutaBuscada)) {
+  System.out.println(frutaBuscada + " esta en el inventario encantados le vendemos");
+} else {
+  System.out.println("Lamentablemente nos quedamos sin " + frutaBuscada);
+}
+```
+
+Como `"Frutilla"` fue agregada previamente, la condición es verdadera y se informa que está disponible.
+
+Cuando una fruta se queda sin stock, se elimina junto con su precio mediante `.remove()`:
+
+```java
+String sinStock = "Frutilla";
+inventario.remove(sinStock);
+```
+
+Finalmente, `.size()` indica cuántas asociaciones quedan en el inventario. Como se agregaron cinco frutas y se eliminó una, el resultado es `4`.
+
+### 💻 Código completo
+
+```java
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class App {
+  public static void main(String[] args) throws Exception {
+
+    System.out.println("Bienvenido a nuestra verduleria (tienda de frutas y verduras)");
+    Map<String, Double> inventario = new LinkedHashMap<>();
+
+    inventario.put("Banana", 0.89);
+    inventario.put("Tomate", 0.75);
+    inventario.put("Palta", 0.95);
+    inventario.put("Frutilla", 0.65);
+    inventario.put("Pimiento", 0.77);
+    System.out.println("Este es el inventario de frutas y verduras : ");
+
+    for (String fruta : inventario.keySet()) {
+      System.out.println(fruta + " : $" + inventario.get(fruta));
+    }
+
+    String frutaBuscada = "Frutilla";
+    System.out.println("Se acerca un cliente y nos pide la siguiente fruta : " + frutaBuscada);
+
+    if (inventario.containsKey(frutaBuscada)) {
+      System.out.println(frutaBuscada + " esta en el inventario encantados le vendemos");
+    } else {
+      System.out.println("Lamentablemente nos quedamos sin " + frutaBuscada);
+    }
+
+    String sinStock = "Frutilla";
+    inventario.remove(sinStock);
+    System.out.println("Nos hemos quedado sin: " + sinStock);
+
+    System.out.println("Este es el inventario actualizado : ");
+    System.out.println("La cantidad de mercaderia es : " + inventario.size());
+  }
+}
+```
+
+### 🔄 Flujo del programa
+
+| Paso | Operación | Resultado |
+| :---: | :--- | :--- |
+| 1 | Se crea un `LinkedHashMap` vacío | El inventario tiene 0 productos. |
+| 2 | Se agregan cinco frutas con `.put()` | El inventario tiene 5 productos. |
+| 3 | Se recorre `.keySet()` | Se muestran las frutas en orden de inserción. |
+| 4 | Se busca `Frutilla` con `.containsKey()` | La fruta existe y se informa que está disponible. |
+| 5 | Se elimina `Frutilla` con `.remove()` | La fruta y su precio desaparecen del mapa. |
+| 6 | Se consulta `.size()` | Quedan 4 productos. |
+
+### 🖥️ Salida esperada
+
+```text
+Bienvenido a nuestra verduleria (tienda de frutas y verduras)
+Este es el inventario de frutas y verduras :
+Banana : $0.89
+Tomate : $0.75
+Palta : $0.95
+Frutilla : $0.65
+Pimiento : $0.77
+Se acerca un cliente y nos pide la siguiente fruta : Frutilla
+Frutilla esta en el inventario encantados le vendemos
+Nos hemos quedado sin: Frutilla
+Este es el inventario actualizado :
+La cantidad de mercaderia es : 4
+```
 
 ---
